@@ -1,0 +1,24 @@
+/* default button */
+.btn-default {
+    background-color: blue;
+    color: white;
+}
+
+nav .btn{
+    color: rgb(255, 255, 255);
+}
+.btn-default:hover,
+.btn-default:focus,
+.btn-default:active    {
+    background-color: #ebebeb;
+    color: #333;
+    border-color: #adadad;
+}
+div .card .card-header{
+    background-color: rgb(255, 185, 79);
+}
+
+div .card .card-body h5:hover{
+    text-decoration : none;
+
+}
