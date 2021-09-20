@@ -18,7 +18,6 @@ div .card .card-header{
     background-color: rgb(255, 185, 79);
 }
 
-div .card .card-body h5:hover{
-    text-decoration : none;
-
+.text-justify>a:hover{
+    color: darkorange !important;
 }
