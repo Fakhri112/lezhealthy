@@ -3,6 +3,9 @@
     background-color: blue;
     color: white;
 }
+.card.mt-3{
+    border: 1px solid black;
+}
 
 nav .btn{
     color: rgb(255, 255, 255);
@@ -15,9 +18,27 @@ nav .btn{
     border-color: #adadad;
 }
 div .card .card-header{
-    background-color: rgb(255, 185, 79);
+    background-color: orange!important;
 }
 
 .text-justify>a:hover{
     color: darkorange !important;
+}
+
+.hover-orange:hover{
+    text-decoration: none;
+    color: darkorange !important;
+}
+
+.nav-item>a:hover{
+    color: rgba(236, 236, 236, 0.616) !important;
+}
+
+.nav-item>.nav-link.cari.active:hover{
+    text-decoration: none !important;
+    color: #4A4F55 !important;
+}
+.nav-item.nav-link.select{
+    text-decoration: none !important;
+    color: #4A4F55 !important;
 }
