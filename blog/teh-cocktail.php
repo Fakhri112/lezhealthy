@@ -1,7 +1,9 @@
 <?php 
     session_start();
     $_SESSION["filename"]=pathinfo(basename(__FILE__),PATHINFO_FILENAME);
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -111,13 +113,6 @@
       </div>
   </div>
   <?php endif ?>
-
-  <?php 
-
-var_dump($_POST);
-
-?>
-
 
   <!-- show comment -->
   <div class="container">

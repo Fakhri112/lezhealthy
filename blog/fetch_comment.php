@@ -24,16 +24,16 @@ foreach($result as $row)
     <button type="button" class="btn btn-default reply" id="'.$row["comment_id"].'">Reply</button></div>
     </div></div>';
     if (!empty($_POST["id"]) && $_POST["id"]==$row["comment_id"]){
-      $output .='<form method="POST" id="reply" action="">
+      $output .='<form method="POST" id="reply" action="" name="reply">
         <div class="form-group">
-         <input name="comment_name" id="comment_name" value="'.$row["comment_sender_name"].'"/>
+         <input type="hidden" name="comment_name" id="comment_name" value="'.$row["comment_sender_name"].'"/>
         </div>
         <div class="form-group">
          <textarea name="comment_content" id="comment_content" class="form-control" style="width: 53rem" placeholder="Enter Comment" rows="5"></textarea>
         </div>
         <div class="form-group">
-         <input  name="comment_id" id="comment_id" value="'.$_POST["id"].'"/>    
-         <input  name="blog_name" id="blog_name" value="'. $_SESSION["filename"].'"/>
+         <input type="hidden" name="comment_id" id="comment_id" value="'.$_POST["id"].'"/>    
+         <input type="hidden" name="blog_name" id="blog_name" value="'. $_SESSION["filename"].'"/>
          <input type="submit" name="submit_reply" id="submit_reply" class="btn btn-info" value="Submit" />
         </div>
        </form>';

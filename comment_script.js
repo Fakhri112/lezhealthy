@@ -13,7 +13,6 @@ $(document).ready(function(){
    {
     if(data != '')
     {
-      console.log(form_data);
      load_comment();
     }
    }
@@ -36,11 +35,7 @@ $(document).ready(function(){
 
  $(document).on('click', '.reply', function(){
   var comment_id = $(this).attr("id");
-  $('#comment_id').val(comment_id);
-  // console.log(comment_id_value);
   var comment_id_serialize = 'id='+comment_id;
-  $('#comment_content').focus();
-  //document.getElementById("comment_content").document.getElementById().scrollIntoView();
   $.ajax({
    url:"fetch_comment.php",
    method:"POST",
@@ -52,26 +47,18 @@ $(document).ready(function(){
   })
  });
 
- $(document).on('click','#submit_reply',function(e){
+ $(document).on('submit','#reply',function(e){
   e.preventDefault();
-  
+  var form_data_reply = $("#reply").serialize();
   $.ajax({
-    type: "POST",
-    url: "add_comment.php",
-    data: { 
-        comment_name: $("#comment_name").val(),
-        comment_content: $('#comment_content').val(),
-        comment_id: $('#comment_id').val(),
-        blog_name: $('#blog_name').val(),
-    },
+   url:"add_comment.php",
+   method:"POST",
+    data: form_data_reply,
     success:function(x){
 
-      
+      load_comment();
     }
   })
-  
-  alert("hello world");
-
   
 });
  
