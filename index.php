@@ -10,172 +10,125 @@
   $awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
   
   $recipe = queryResep("SELECT * FROM resep ORDER BY id DESC LIMIT $awalData, $jumlahDataPerHalaman");
-
 ?>
 
 <!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEZHEALTY</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <style><?php include 'gaya.css'; ?></style>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</head>
-<body class="mt-5">
-  
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top navbar-static-top">
-    <div class="container">
-        <div class="container-fluid">
-          <a class="navbar-brand font-weight-bold" href="index.php">LEZHEALTY</a>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <form class="d-flex" action="result.php" method="get">
-                <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
-                <button class="btn ml-2 btn-default" type="submit" name="cari">Cari</button>
-              </form>
-            </div>
-          </div>
-          <div class="navbar-nav">
-            <a class="nav-link" href="#">Kitchen Tips</a>
-            <a class="nav-link" href="#">Category</a>
-            <a class="nav-link" href="#">Submit Recipe</a>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tools</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Health Calculator</a>
-                <a class="dropdown-item" href="#">Food Composer</a>
-              </div>
-            </li>
-          </div>
+<html lang="en">
+  <head>
+    <!-- Required meta tags ---------------------------------------------------->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS ---------------------------------------------------->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
+
+    <!-- CSS ---------------------------------------------------->
+    <link rel="stylesheet" href="gaya.css" />
+
+    <title>Lezhealty.com</title>
+  </head>
+
+  <body>
+    <!-- Nav ---------------------------------------------------->
+    <nav class="p-3 bg-dark text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap" /></svg>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="home.php" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="index.php" class="nav-link px-2 text-white">Kichen Tips</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Category</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Contact</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          </ul>
+
+          <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+            <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search" />
+          </form>
+
           <div>
-            <a class="navbar-brand ml-4" href="login.php">
-              <img class="rounded-circle"src="img/default-avatar-profile-icon-social-260nw-1677509740.jpg" alt="..." height="36">
+            <a class="navbar-brand ml-4" href="#">
+              <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
             </a>
           </div>
         </div>
-    </div>
-  </nav>
-      
-
-      <div class="container">
-          <div class="row">
-            <div class="col-8">
-              <div class="card w-60 mt-5">
-                <div class="card-header" style="background-color: orange;">
-                  <h5 class="card-title">Daily Fact</h5>
-                </div>
-                <div class="card-body p-0">
-                        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                          <ol class="carousel-indicators">
-                              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                          </ol>
-                          <div class="carousel-inner">
-                              <div class="carousel-item active">
-                                  <img class="d-block w-100" src="img/animals.jfif" alt="First slide">
-                                  <div class="carousel-caption d-none d-md-block">
-                                      <h5>My Caption Title (1st Image)</h5>
-                                      <p>The whole caption will only show up if the screen is at least medium size.</p>
-                                  </div>
-                              </div>
-                              <div class="carousel-item">
-                                  <img class="d-block w-100" src="img/arch.jfif" alt="Second slide">
-                              </div>
-                              <div class="carousel-item">
-                                  <img class="d-block w-100" src="img/nature.jfif" alt="Third slide">
-                              </div>
-                          </div>
-                                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                          </div>
+      </div>
+    </nav>
+    <!-- End Nav ---------------------------------------------------->
+    <!-- Content ---------------------------------------------------->
+    <div class="container" style="margin-top: 2rem;">
+      <div class="row">
+        <!-- Main Content ---------------------------------------------------->
+        <div class="col-sm-8">
+          <div class="container">
+              <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                  </div>
+                  <div class="carousel-inner">
+                    <div class="carousel-item active">
+                      <a href="https://www.google.com"><img src="img/food1.jpg" class="d-block w-100" alt="..."></a>
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>First slide label</h5>
+                        <p>Some representative placeholder content for the first slide.</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="img/food2.jpg" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Second slide label</h5>
+                        <p>Some representative placeholder content for the second slide.</p>
+                      </div>
+                    </div>
+                    <div class="carousel-item">
+                      <img src="img/food3.jpg" class="d-block w-100" alt="...">
+                      <div class="carousel-caption d-none d-md-block">
+                        <h5>Third slide label</h5>
+                        <p>Some representative placeholder content for the third slide.</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <!-- PHP TESTING-->
-                <?php
-                
-
-                ?>
-
-
-              <div class="col-md-4 mt-5">
-                <nav>
-                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Popular</a>
-                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Recent</a>
-                    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Comment</a>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+              </div>
+              <!-- Blog ---------------------------------------------------->
+              <?php foreach($recipe as $res) : ?>
+              <div class="card" style="width: auto; margin-top: 2rem;">
+                <img src="blog/<?= $res["sumber"] . ".jpg" ?>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <div class="text-justify">
+                    <a href="" class="stretched-link"><h5><?= $res["judul"] ?></h5></a>
+                    <p><?= $res["deskripsi"] ?></p>
+                    <?php if ( strlen($res["tag1"])) :?>
+              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $res["tag1"]?>><?php echo $res["tag1"]?></button>
+            <?php endif ?>
+            <?php if (strlen($res["tag2"])) :?>
+              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $res["tag2"]?>><?php echo $res["tag2"]?></button>
+            <?php endif ?>
+            <?php if ( strlen($res["tag3"])) :?>
+              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $res["tag3"]?>><?php echo $res["tag3"]?></button>
+            <?php endif ?>
+            <?php if ( strlen($res["tag4"])) :?>
+              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $res["tag4"]?>><?php echo $res["tag4"]?></button>
+            <?php endif ?>
                   </div>
-                </nav>
-                <div class="tab-content" id="nav-tabContent">
-                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
-                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>      
-    </div>
-
-    <!--Hero Section-->
-
-
-
-    <?php 
-    // if (isset($_POST["register"])) {
-    //     var_dump($result);
-    //  };
-    ?>
-  
-
-  <!-- Hero Section -->
-  <div class="container">
-  <?php foreach($recipe as $card) : ?>
-
-  <?php $link_img = $card["sumber"].".jpg";?>
-    <form action="" method="post">  
-      <div class="card mt-4" style="width: 66%;">
-        <img src="blog/<?php echo $link_img?>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <div class="text-justify">
-            <a href="" class="text-decoration-none"><h5><?php echo $card["judul"]?></h5></a>
-            <p><?php echo $card["deskripsi"] ?></p>
-
-            <?php if ( strlen($card["tag1"])) :?>
-              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag1"]?>><?php echo $card["tag1"]?></button>
-            <?php endif ?>
-            <?php if (strlen($card["tag2"])) :?>
-              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag2"]?>><?php echo $card["tag2"]?></button>
-            <?php endif ?>
-            <?php if ( strlen($card["tag3"])) :?>
-              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag3"]?>><?php echo $card["tag3"]?></button>
-            <?php endif ?>
-            <?php if ( strlen($card["tag4"])) :?>
-              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag4"]?>><?php echo $card["tag4"]?></button>
-            <?php endif ?>
-          </div>
-        </div>
-      </div>
-    </form>
-
-  <?php endforeach; ?>
-  </div> 
-
-  <!-- Pagi Nasi -->
-
-    <nav aria-label="...">
+              <?php endforeach; ?>
+              <!--  ---------------------------------------------------->
+                <!-- End Blog ---------------------------------------------------->
+                <nav aria-label="...">
         <ul class="pagination justify-content-center mt-3">
             <?php if($halamanAktif > 1 ) : ?>
                 <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif-1 ?>">Previous</a></li>
@@ -204,27 +157,85 @@
 
         </ul>
     </nav>
-
-
-  <!-- Footer -->
-      <footer class="bg-dark">
-        <div class="container">
-          <footer class="py-4 mt-3">
-              <div class="row">
-                <div class="col">
-                  <ul class="nav">
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-4">
-                  <p class="text-right" style="color:rgb(226, 226, 226);">&copy; 2021 LEZHEALTY, Corp</p>
-                </div>
-              </div>
-          </footer>
         </div>
-      </footer>
+      </div>
+      <!-- End Main Content ---------------------------------------------------->
+      <!-- Trend ---------------------------------------------------->
+      <div class="col-sm-4">
+        <p>Date/Time: <span id="datetime"></span></p>
 
+        <script>
+          var dt = new Date();
+          document.getElementById("datetime").innerHTML = dt.toLocaleString();
+        </script>
 
-</body>
+        <br />
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+        <br />
+
+        <div class="row row-cols-1 row-cols-md-1 g-4">
+          <div class="col">
+            <div class="card">
+              <img src="img/food1.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="img/food2.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="img/food3.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <img src="img/Fruit.jpg" class="card-img-top" alt="..." />
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       <!-- End Trend ---------------------------------------------------->
+  </div>
+<!-- End Content ---------------------------------------------------->
+
+    <!-- Footer ---------------------------------------------------->
+    <footer>
+      <div class="container">
+        <footer class="py-3 my-4">
+          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Food</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Tips</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+          </ul>
+          <p class="text-center text-muted">&copy; 2021 Company, Inc</p>
+        </footer>
+      </div>
+    </footer>
+    <!-- End Footer ---------------------------------------------------->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  </body>
 </html>
