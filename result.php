@@ -8,7 +8,7 @@
   $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
   $awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
   
-  if (isset($_GET["cari"])) {
+  if (isset($_GET["keyword"])) {
      $recipe = cari($_GET["keyword"]);
   }
 
@@ -27,41 +27,49 @@
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-warning fixed-top navbar-static-top">
-    <div class="container">
-        <div class="container-fluid">
-          <a class="navbar-brand font-weight-bold" href="index.php">LEZHEALTY</a>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <form class="d-flex" action="result.php" method="get">
-                <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
-                <button class="btn ml-2 btn-default" type="submit" name="cari">Cari</button>
-              </form>
-            </div>
-          </div>
-          <div class="navbar-nav">
-            <a class="nav-link" href="#">Kitchen Tips</a>
-            <a class="nav-link" href="#">Category</a>
-            <a class="nav-link" href="#">Submit Recipe</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="container">
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="index.php">Home </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="kitchen-tips.php">Kitchen Tips</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="category.php">Category</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="submit-recipe.php">Submit Resep</a>
+            </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tools</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Health Calculator</a>
-                <a class="dropdown-item" href="#">Food Composer</a>
+                <a class="dropdown-item" href="health-calculator.php">Health Calculator</a>
+                <a class="dropdown-item" href="food-composer.php">Food Composer</a>
               </div>
             </li>
-          </div>
-          <div>
-            <a class="navbar-brand ml-4" href="login.php">
-              <img class="rounded-circle"src="img/default-avatar-profile-icon-social-260nw-1677509740.jpg" alt="..." height="36">
-            </a>
-          </div>
-        </div>
-    </div>
-  </nav>
+          </ul>
 
-  <div class="container" style="margin-top:80px">
+        <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
+           <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
+        </form>
+        <span>
+            <a class="navbar-brand ml-4" href="login.php">
+              <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
+            </a>
+        </span>
+      </div>
+      </div>
+    </nav>
+
+  <div class="container" style="margin-top:90px">
     <h3>Search Result</h3><hr/>
         <nav>
           <div class="nav nav-tabs bg-warning rounded py-3 mb-3 justify-content-center" id="nav-tab" role="tablist";">

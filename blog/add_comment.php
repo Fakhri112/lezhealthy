@@ -2,7 +2,7 @@
 
 //add_comment.php
 
-$connect = new PDO('mysql:host=localhost;dbname=food_and_health', 'root', '');
+$connect = mysqli_connect("localhost","root","","food_and_health");
 
 $kosong = '';
 $comment_name = '';
@@ -30,16 +30,16 @@ else
 if($kosong == '')
 {
  $query = "INSERT INTO tbl_comment (parent_comment_id, comment, comment_sender_name, blog_name) 
- VALUES (:parent_comment_id, :comment, :comment_sender_name, :blog_name)";
+ VALUES (?, ?, ?, ?)";
  $statement = $connect->prepare($query);
- $statement->execute(
-  array(
-   ':parent_comment_id' => $_POST["comment_id"],
-   ':comment'    => $comment_content,
-   ':comment_sender_name' => $comment_name,
-   ':blog_name' => $_POST["blog_name"]
-  )
- );
+ $statement->bind_param("ssss", $parent_comment_id, $comment, $comment_sender_name, $blog_name);
+
+$parent_comment_id = $_POST["comment_id"];
+$comment = $comment_content;
+$comment_sender_name = $comment_name;
+$blog_name = $_POST["blog_name"];
+$statement->execute();
+
 }
 
 $data = array('kosong1'  => $kosong);
