@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 03, 2021 at 02:48 PM
+-- Generation Time: Oct 18, 2021 at 04:48 PM
 -- Server version: 10.4.21-MariaDB
--- PHP Version: 7.3.30
+-- PHP Version: 8.0.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -53,7 +53,17 @@ INSERT INTO `resep` (`id`, `sumber`, `judul`, `deskripsi`, `tag1`, `tag2`, `tag3
 (9, 'sambal-matah', 'Sambal Matah', 'Sambal matah adalah salah satu sambal khas Indonesia yang berasal dari Bali. Sambal ini tidak mengalami proses masak dengan api. Hanya iris-mengiris semua bahan lalu campur dan beri sedikit minyak kelapa serta di bumbui dengan sedikit garam dan di beri perasan jeruk nipis.', 'Pedas', 'Sambal', '', ''),
 (10, 'telur-ceplok-masak-santan', 'Telur Ceplok Masak Santan', 'Sajikan dan nikmati enak dan sedapnya olahan telur ceplok yang disajikan dengan variasi bumbu berbeda yang lezat. Sajian kali ini akan dapat dihidangka bersama dengan sepiring nasi hangat yang enak dan sedap.', 'Makanan Basah', 'Lauk', 'Goreng', ''),
 (11, 'tahu-cabai-garam-praktis', 'Tahu Cabai Garam Praktis', 'Resep tahu cabai garam cukup mudah dipraktikkan di rumah. Bahan-bahan yang digunakan pun hampir selalu ada di tiap dapur.  Tahu cabai garam biasa disajikan di restoran chinese food. Teksturnya yang kering dan rasanya yang gurih membuat tahu cabai garam cocok dijadikan sebagai camilan atau lauk makan.', 'Camilan', 'Goreng', 'Lauk', 'Vegetarian'),
-(12, 'teh-cocktail', 'Teh Cocktail', 'Cocktail buah atau koktil adalah makanan yang terbuat dari potongan buah dan sirup serta disajikan dalam keadaan dingin. Meskipun namanya mirip dengan minuman beralkohol yang disebut “koktail”, koktail buah sama sekali tidak dicampur atau mengandung alkohol. Cocktail buah dapat dikreasikan menjadi aneka resep yang menggugah selera.', 'Minuman', '', '', '');
+(12, 'teh-cocktail', 'Teh Cocktail', 'Cocktail buah atau koktil adalah makanan yang terbuat dari potongan buah dan sirup serta disajikan dalam keadaan dingin. Meskipun namanya mirip dengan minuman beralkohol yang disebut “koktail”, koktail buah sama sekali tidak dicampur atau mengandung alkohol. Cocktail buah dapat dikreasikan menjadi aneka resep yang menggugah selera.', 'Minuman', '', '', ''),
+(13, 'ayam-krispy-bumbu-cabai', 'Ayam krispy bumbu cabai', 'Ayam bisa diolah menjadi berbagai macam menu makanan. Bahkan saat ini, ayam yang sudah digoreng dengan tepung diberi sedikit sensasi hancur dengan cara digeprek.\r\n\r\nMemangnya, apa saja kandungan gizi di dalam daging ayam segar? Berdasarkan Data Komposisi Pangan Indonesia, 100 gram daging ayam memiliki kandungan gizi', 'ayam', 'cabai', '', ''),
+(14, 'bubur-edamame-telur-puyuh', 'Bubur edamame telur puyuh', 'Edamame merupakan sumber protein nabati untuk membangun otot dan sel-sel tubuh. Edamame juga mengandung serat yang baik untuk pencernaan anak.', 'telur', 'puyuh', 'bubur', 'anak'),
+(15, 'kangkung-bumbu-kemiri-pedas', 'Kangkung bumbu kemiri pedas', 'Kangkung bumbu kemiri pedas. Kangkung merupakan salah satu tanaman yang banyak ditemui di negara-negara Asia, khususnya di Indonesia.', 'kangkung', 'kemiri', 'pedas', ''),
+(16, 'kangkung-bumbu-tauco', 'Kangkung bumbu tauco', 'Kangkung bumbu tauco. kangkung Tak jauh berbeda dengan jenis sayuran lainnya, sayuran yang punya nama latin Ipomoea aquatica ini mengandung sejumlah nutrisi yang baik bagi tubuh.', 'kangkung', 'tauco', '', ''),
+(17, 'resep-kangkung-krispy', 'Resep Kangkung Krispy', 'Kangkung merupakan salah satu tanaman yang banyak ditemui di negara-negara Asia, khususnya di Indonesia. Dikutip dari situs Data Komposisi Pangan Indonesia, berikut ini adalah kandungan gizi yang terdapat pada 100 gram (g) kangkung segar', 'kangkung', 'krispy', '', ''),
+(18, 'sambal-goreng-tempe', 'Sambal Goreng Tempe', 'Tempe adalah makanan yang pasti tidak asing bagi Anda. Makanan fermentasi dari kacang kedelai ini telah menemani hidup sebagai orang Indonesia. Rasa khas tempe dan struktur yang sangat berbeda dari tahu ini selain murah juga bisa bikin ketagihan. Beragam kandungan pada tempe menyimpan banyak manfaat bagi kesehatan tubuh.', 'sambal', 'goreng', 'tempe', ''),
+(19, 'sambal-pelecing-kangkung', 'Sambal Pelecing Kangkung', 'Kangkung adalah tumbuhan yang termasuk jenis sayur-sayuran dan ditanam sebagai makanan. Tumbuhan ini banyak dijual di pasar-pasar. ', 'sambal', 'kangkung', '', ''),
+(20, 'sayur-asem', 'Sayur asem', 'Sayur asem adalah satu di antara menu masakan yang memiliki rasa asam, tetapi ada pula yang membuatnya menjadi pedas. Masakan ini terdiri dari berbagai campuran sayur-sayuran dan kacang-kacangan.', 'sayur', 'asem', '', ''),
+(21, 'tumis-kacang-panjang-dan-tempe', 'Tumis kacang panjang dan tempe', 'Kacang panjang tentu buka nama sayuran yang terdengar asing di telinga masyarakat Indonesia. Meski umum dimakan, mungkin tak banyak yang mengetahui kandungan gizi dan manfaat kesehatan dari kacang panjang.', 'kacang', 'kacang panjang', 'tempe', 'sayur'),
+(22, 'tumis-udang-buncis', 'Tumis udang buncis', 'Udang merupakan salah satu boga bahari yang banyak dikonsumsi di seluruh dunia. Dalam dunia hewan, udang masuk ke dalam ordo decapoda dan banyak dibudidayakan secara komersial dalam budi daya perairan.', 'tumis', 'udang', '', '');
 
 --
 -- Indexes for dumped tables
@@ -73,7 +83,7 @@ ALTER TABLE `resep`
 -- AUTO_INCREMENT for table `resep`
 --
 ALTER TABLE `resep`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
