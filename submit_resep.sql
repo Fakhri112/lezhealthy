@@ -24,32 +24,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Table structure for table `submit_resep`
 --
 
-CREATE TABLE `user` (
+CREATE TABLE `submit_resep` (
+  `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `nohp` int(50) NOT NULL
+  `nama_resep` varchar(1000) NOT NULL,
+  `deskripsi_resep` varchar(1000) NOT NULL,
+  `komposisi` varchar(2000) NOT NULL,
+  `cara_buat` varchar(2000) NOT NULL,
+  `gambar` varchar(50) NOT NULL,
+  `status_resep` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`username`, `password`, `email`, `nohp`) VALUES
-('melody', '$2y$10$rdG8Gr78aosr5m6tsJ0PXOZUlIxPqE8T9GvDLFzecwk/bV8HM7kZu', '123@gmail.com', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `user`
+-- Indexes for table `submit_resep`
 --
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`username`);
+ALTER TABLE `submit_resep`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `submit_resep`
+--
+ALTER TABLE `submit_resep`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

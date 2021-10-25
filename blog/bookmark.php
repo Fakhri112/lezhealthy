@@ -13,8 +13,7 @@ $result = $connect->query($query);
 //cek apakah username pernah ada di table
 if(mysqli_num_rows($result) == 0)
 {
- $query = "INSERT INTO bookmark (username, blog_name, status) 
- VALUES (?, ?, ?)";
+ $query = "INSERT INTO bookmark (username, blog_name, status) VALUES (?, ?, ?)";
  $statement = $connect->prepare($query);
  $statement->bind_param("sss", $username, $blog_name, $status);
 

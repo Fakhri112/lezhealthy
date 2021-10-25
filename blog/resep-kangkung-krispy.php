@@ -199,18 +199,25 @@
   <div id="display_comment"></div>
   </div>
 
-  <footer>
-      <div class="container">
-        <footer class="py-3 my-4">
-          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          </ul>
-          <ul class="nav justify-content-center">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted footerhoover">Contact</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted footerhoover">About</a></li>
-          </ul>
-        </footer>
-      </div>
-    </footer>
+  <footer class="bg-dark mt-auto">
+    <div class="container">
+      <footer class="py-4 footer-blog">
+      <div class="row">
+        <div class="col-9">
+            <ul class="nav">
+            <li class="nav-item"><a href="../contact.php" class="nav-link px-2 text-muted contact-about">Contact</a></li>
+            <li class="nav-item"><a href="../about.php" class="nav-link px-2 text-muted contact-about">About</a></li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="nav justify-content-end">
+            <li class="nav-item"><a class="nav-link copyright">&copy; 2021 LEZHEALTY</a></li>
+            </ul>
+        </div>
+        </div>
+      </footer>
+    </div>
+  </footer>
 
 </body>
 <script src="../comment_script.js"></script>

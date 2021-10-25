@@ -124,25 +124,24 @@
                   <?php foreach($recipe as $card) : ?>
 
                   <?php $link_img = $card["sumber"].".jpg";?>
-                    <form action="" method="post">  
+                  <form action="search-category.php" method="post">
                       <div class="card mt-4">
                         <img src="blog/<?php echo $link_img?>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <div class="text-justify">
                             <a href="blog/<?php echo $card["sumber"].".php"?>" class="text-decoration-none"><h5><?php echo $card["judul"]?></h5></a>
                             <p><?php echo $card["deskripsi"] ?></p>
-
                             <?php if ( strlen($card["tag1"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag1"]?>><?php echo $card["tag1"]?></button>
+                            <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag1"];?>">  
                             <?php endif ?>
                             <?php if (strlen($card["tag2"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag2"]?>><?php echo $card["tag2"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag2"];?>">
                             <?php endif ?>
                             <?php if ( strlen($card["tag3"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag3"]?>><?php echo $card["tag3"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag3"];?>">
                             <?php endif ?>
                             <?php if ( strlen($card["tag4"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag4"]?>><?php echo $card["tag4"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag4"];?>">
                             <?php endif ?>
                           </div>
                         </div>
@@ -239,20 +238,28 @@
             <?php endif;?>
         </ul>
     </nav>
+    
+</div>
 
-    <footer>
-      <div class="container">
-        <footer class="py-3 my-4">
-          <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-          </ul>
-          <ul class="nav justify-content-center">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted footerhoover">Contact</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted footerhoover">About</a></li>
-          </ul>
-        </footer>
-      </div>
-    </footer>
-    <!-- End Footer ---------------------------------------------------->
+<footer class="bg-dark mt-auto">
+    <div class="container">
+      <footer class="py-4 footer-blog">
+      <div class="row">
+        <div class="col-9">
+            <ul class="nav">
+            <li class="nav-item"><a href="../contact.php" class="nav-link px-2 text-muted contact-about">Contact</a></li>
+            <li class="nav-item"><a href="../about.php" class="nav-link px-2 text-muted contact-about">About</a></li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="nav justify-content-end">
+            <li class="nav-item"><a class="nav-link copyright">&copy; 2021 LEZHEALTY</a></li>
+            </ul>
+        </div>
+        </div>
+      </footer>
+    </div>
+  </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
   </body>

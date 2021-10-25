@@ -65,3 +65,44 @@ div .card .card-header{
 .c.form-login{
     margin-top: 115px !important;
 }
+
+.py-4.footer-blog{
+    margin-top: 61px !important;
+}
+
+.nav-link.copyright{
+    color: #ebebeb !important;
+}
+
+.nav-link.copyright:hover{
+    color: #ebebeb !important;
+}
+
+.nav-link.px-2.text-muted.contact-about{
+    color: aliceblue !important;
+}
+.nav-link.px-2.text-muted.contact-about:hover{
+    color: rgb(180, 180, 180) !important;
+}
+.bg-dark.footer-category{
+    position: relative;
+    margin-top: 103px !important;
+}
+.bg-dark.footer-login{
+    position:sticky;
+    margin-top: 129px !important;
+}
+
+.btn-card-no-background{
+padding: 0%;
+margin-right: 100px;
+background: unset !important;
+border: unset !important;
+outline: unset !important;
+margin-bottom:.5rem;
+font-family:inherit;
+font-weight:500;
+line-height:1.2;
+color:inherit;
+font-size:1.25rem;
+}

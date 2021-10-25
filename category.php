@@ -1,16 +1,8 @@
-<?php
-  session_start();
-  require 'function.php';
+<?php 
 
-  if(isset($_POST["login"])) {
-    login();
-  }
-  if(isset($_POST["register"])){
-    register();
-  }
-  if(isset($_SESSION["username"])){
-    header("Location:profile.php");
-  }
+require 'function.php';
+session_start();
+
 
 ?>
 
@@ -65,62 +57,44 @@
               <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
             </a>
         </span>
+
       </div>
       </div>
     </nav>
 
-<div class="container-fluid" style="margin-top: 160px">
-    <div class="row justify-content-center align-items-center h-100">
-        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Register</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
-                </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="login" class="btn btn-info btn-lg btn-block">Login</button>
-                </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
-                </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Email" name="email" id="email" type="text">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="register" class="btn btn-info btn-lg btn-block">Registrasi</button>
-                </div>
-            </form>
-          </div>
-        </div>
-
-
+    <div class="container" style="margin-top: 110px;">
+        <h3>Category</h3>
+        <hr>
+        <div class="d-flex justify-content-center">
+        <form action="search-category.php" method="post">
+            <div class="row mt-5">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Makanan Basah" />
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Sayur"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Goreng"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Minuman"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Rebus"/>
+            </div>
+            <div class="row mt-5 justify-content-center">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Breakfast"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Sambal"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Pedas"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Camilan"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Lauk"/>
+            </div>
+            <div class="row  mt-5 justify-content-center">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Kuah"/>
+            </div>
+        </form>
         </div>
     </div>
-</div>
 
-                
+    <?php 
+    if( isset($_POST["submit_resep"])){
+        kirim_resep();
+    }
+    ?>
 
-<footer class="bg-dark footer-login">
+<footer class="bg-dark footer-category">
     <div class="container">
       <div class="py-4 footer-blog">
       <div class="row">

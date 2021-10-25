@@ -1,16 +1,8 @@
-<?php
-  session_start();
-  require 'function.php';
+<?php 
 
-  if(isset($_POST["login"])) {
-    login();
-  }
-  if(isset($_POST["register"])){
-    register();
-  }
-  if(isset($_SESSION["username"])){
-    header("Location:profile.php");
-  }
+require 'function.php';
+session_start();
+
 
 ?>
 
@@ -65,64 +57,62 @@
               <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
             </a>
         </span>
+
       </div>
       </div>
     </nav>
 
-<div class="container-fluid" style="margin-top: 160px">
-    <div class="row justify-content-center align-items-center h-100">
-        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+    <div class="container" style="margin-top: 110px;">
+        <h3>Submit Resep</h3>
+        <hr>
+        <p class="mb-4">Admin akan mereview resep yang anda kirimkan. Kami akan mengirimkan anda notifikasi apabila resep yang anda kirimkan sudah disetujui untuk ditambahkan ke database blog kami</p>
+        <div class="d-flex justify-content-center">
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="mb-3">
+            <h6>Nama Resep</h6>
+            <input class="form-control" id="nama_resep" name="nama_resep"style="width: 500px;" autocomplete="off">
+            </div>
 
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Register</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
-                </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="login" class="btn btn-info btn-lg btn-block">Login</button>
-                </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
-                </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Email" name="email" id="email" type="text">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="register" class="btn btn-info btn-lg btn-block">Registrasi</button>
-                </div>
-            </form>
-          </div>
-        </div>
+            <div class="mb-3">
+            <h6>Deskripsi</h6>
+            <textarea class="form-control" id="deskripsi_resep" name="deskripsi_resep"style="width: 500px; height:110px;"></textarea>
+            </div>
+            
+            <div class="mb-3">
+            <h6>Bahan-Bahan</h6>
+            <textarea class="form-control" id="komposisi" name="komposisi"style="width: 500px; height:110px;"></textarea>
+            </div>
 
+            <div class="mb-3">
+            <h6>Cara-Pembuatan</h6>
+            <textarea class="form-control" id="cara_buat" name="cara_buat"style="width: 500px; height:110px;"></textarea>
+            </div>
 
+            <div class="mb-3">
+            <h6>Masukkan Gambar</h6>
+            <input id="gambar" name="gambar" type="file" />
+            </div>
+
+            <input type="hidden" name="username" id="username" class="form-control" placeholder="Enter Name" value="<?= $_SESSION["username"]?>"/>
+            <input type="hidden" name="status_resep" id="status_resep" class="form-control" placeholder="Enter Name" value="0"/>
+
+            <div class="d-flex justify-content-center">
+            <input type="submit" name="submit_resep" id="submit_resep" class="btn btn-info mt-3" value="Submit" />
+            </div>
+
+        </form>
         </div>
     </div>
-</div>
 
-                
+    <?php 
+    if( isset($_POST["submit_resep"])){
+        kirim_resep();
+    }
+    ?>
 
-<footer class="bg-dark footer-login">
+  <footer class="bg-dark mt-auto">
     <div class="container">
-      <div class="py-4 footer-blog">
+      <footer class="py-4 footer-blog">
       <div class="row">
         <div class="col-9">
             <ul class="nav">
@@ -136,7 +126,7 @@
             </ul>
         </div>
         </div>
-    </div>
+      </footer>
     </div>
   </footer>
 

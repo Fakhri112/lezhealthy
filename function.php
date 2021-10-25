@@ -79,8 +79,50 @@
         $conn->query($insert);
         $_SESSION["username"] = $username;
         header("Location:index.php");
-        return $conn -> affected_rows;
     }
+
+    function kirim_resep(){
+        global $conn;
+        $username = $_POST["username"];
+        $nama_resep = $_POST["nama_resep"];
+        $komposisi = $_POST["komposisi"];
+        $cara_buat = $_POST["cara_buat"];
+        $deskripsi_resep = $_POST["deskripsi_resep"];
+        $status_resep = $_POST["status_resep"];
+        $gambar = gambar_submit_resep();
+
+        if (!$gambar){
+            return false;
+        }
+
+        $insert = "INSERT INTO submit_resep (username, nama_resep, deskripsi_resep, komposisi, cara_buat, gambar, status_resep) VALUES ('$username', '$nama_resep', '$deskripsi_resep', '$komposisi', '$cara_buat', '$gambar','$status_resep')";
+        $conn->query($insert);
+        return true;
+
+
+    }
+
+    function gambar_submit_resep(){
+        $namafile = $_FILES["gambar"]["name"];
+        $error = $_FILES["gambar"]["error"];
+        $tmpName = $_FILES["gambar"]["tmp_name"];
+
+        if ($error === 4){
+            echo "<script>alert('Tidak ada gambar dipilih');</script>";
+            return false;
+
+        }
+        $allowedextension = ['jpg', 'jpeg', 'png', 'jfif'];
+        $extension = pathinfo($namafile,PATHINFO_EXTENSION);
+        if (!in_array($extension, $allowedextension)){
+            echo "<script>alert('Format file tidak mendukung');</script>";
+            return false;
+        }
+
+        move_uploaded_file($tmpName, 'upload/submit-resep/'.$namafile);
+        return $namafile;
+    }
+
 
    
 

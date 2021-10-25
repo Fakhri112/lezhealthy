@@ -25,7 +25,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style><?php include 'gaya.css'; ?></style>
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,7 +69,7 @@
       </div>
     </nav>
 
-  <div class="container" style="margin-top:90px">
+  <div class="container" style="margin-top:110px">
     <h3>Search Result</h3><hr/>
         <nav>
           <div class="nav nav-tabs bg-warning rounded py-3 mb-3 justify-content-center" id="nav-tab" role="tablist";">
@@ -82,6 +82,7 @@
 
                 <?php foreach($recipe as $card) : ?>
                   <?php $link_img = $card["sumber"].".jpg";?>
+                    <form action="search-category.php" method="post">
                     <div class="card mb-3" style="max-width: 900px;">
                       <div class="row no-gutters">
                         <div class="col-md-4">
@@ -89,49 +90,56 @@
                         </div>
                         <div class="col-md-8">
                           <div class="card-body">
-                            <a class="hover-orange" href=""><h5 class="card-title"><?=$card["judul"]?></h5></a>
+                            <a class="hover-orange" href=blog/<?= $card["sumber"].".php"; ?>><h5 class="card-title"><?=$card["judul"]?></h5></a>
                             <p class="card-text"><?=$card["deskripsi"]?></p>
                             <?php if ( strlen($card["tag1"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag1"]?>><?php echo $card["tag1"]?></button>
+                            <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag1"];?>">  
                             <?php endif ?>
                             <?php if (strlen($card["tag2"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag2"]?>><?php echo $card["tag2"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag2"];?>">
                             <?php endif ?>
                             <?php if ( strlen($card["tag3"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag3"]?>><?php echo $card["tag3"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag3"];?>">
                             <?php endif ?>
                             <?php if ( strlen($card["tag4"])) :?>
-                              <button type="submit" class="btn btn-primary" name="register" value=<?php echo $card["tag4"]?>><?php echo $card["tag4"]?></button>
+                              <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag4"];?>">
                             <?php endif ?>
                           </div>
                         </div>
                       </div>
                     </div>
-                <?php endforeach; ?>
+                    </form>
+                <?php 
+                endforeach; 
+                $_GET["keyword"] = NULL;
+                ?>
                 
           </div>
-          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            
+          </div>
         </div>
     </div>
 
-
-  <footer class="bg-dark mt-auto">
+    <div class="bg-dark">
     <div class="container">
-      <footer class="py-4 mt-3">
-          <div class="row">
-            <div class="col">
-              <ul class="nav">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contact</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-              </ul>
-            </div>
-            <div class="col-md-4">
-              <p class="text-right" style="color:rgb(226, 226, 226);">&copy; 2021 LEZHEALTY, Corp</p>
-            </div>
-          </div>
-      </footer>
+      <div class="p-4 footer-blog">
+      <div class="row">
+        <div class="col-9">
+            <ul class="nav">
+            <li class="nav-item"><a href="../contact.php" class="nav-link px-2 text-muted contact-about">Contact</a></li>
+            <li class="nav-item"><a href="../about.php" class="nav-link px-2 text-muted contact-about">About</a></li>
+            </ul>
+        </div>
+        <div class="col-3">
+            <ul class="nav justify-content-end">
+            <li class="nav-item"><a class="nav-link copyright">&copy; 2021 LEZHEALTY</a></li>
+            </ul>
+        </div>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
 
 </body>
 </html>

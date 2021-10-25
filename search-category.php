@@ -1,15 +1,17 @@
 <?php
-  session_start();
   require 'function.php';
 
-  if(isset($_POST["login"])) {
-    login();
-  }
-  if(isset($_POST["register"])){
-    register();
-  }
-  if(isset($_SESSION["username"])){
-    header("Location:profile.php");
+  //pagination
+  $jumlahDataPerHalaman = 6;
+  $jumlahData = count(queryResep("SELECT * FROM resep"));
+  $jumlahHalaman = ceil($jumlahData/$jumlahDataPerHalaman);
+  $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+  $awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
+  
+  if (isset($_POST["submit_ct"])) {
+     $recipe = cari($_POST["submit_ct"]);
+  }else{
+    header("Location:index.php");
   }
 
 ?>
@@ -26,8 +28,8 @@
     <style><?php include 'gaya.css'; ?></style>
 </head>
 <body>
-    <!-- Nav ---------------------------------------------------->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -51,8 +53,8 @@
               <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Tools</a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="healthcalculator.php">Health Calculator</a>
-                <a class="dropdown-item" href="foodcomposer.php">Food Composer</a>
+                <a class="dropdown-item" href="health-calculator.php">Health Calculator</a>
+                <a class="dropdown-item" href="food-composer.php">Food Composer</a>
               </div>
             </li>
           </ul>
@@ -69,60 +71,47 @@
       </div>
     </nav>
 
-<div class="container-fluid" style="margin-top: 160px">
-    <div class="row justify-content-center align-items-center h-100">
-        <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-3">
-
-        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Register</a>
-          </li>
-        </ul>
-        <div class="tab-content" id="pills-tabContent">
-          <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
+    <div class="container" style="margin-top: 110px;">
+    <h3><?=$_POST["submit_ct"]?></h3><hr/>
+    <?php foreach($recipe as $card) : ?>
+        <?php $link_img = $card["sumber"].".jpg";?>
+        <form action="" method="post">
+        <div class="card mb-3" style="max-width: 900px;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="blog/<?= $link_img;?>" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <a class="hover-orange" href=blog/<?= $card["sumber"].".php"; ?>><h5 class="card-title"><?=$card["judul"]?></h5></a>
+                <p class="card-text"><?=$card["deskripsi"]?></p>
+                <?php if ( strlen($card["tag1"])) :?>
+                <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag1"];?>">  
+                <?php endif ?>
+                <?php if (strlen($card["tag2"])) :?>
+                    <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag2"];?>">
+                <?php endif ?>
+                <?php if ( strlen($card["tag3"])) :?>
+                    <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag3"];?>">
+                <?php endif ?>
+                <?php if ( strlen($card["tag4"])) :?>
+                    <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag4"];?>">
+                <?php endif ?>
                 </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="login" class="btn btn-info btn-lg btn-block">Login</button>
-                </div>
-            </form>
-          </div>
-          <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-          <form action="" method="post">
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
-                </div>
-                <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
-                </div>
-                <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Email" name="email" id="email" type="text">
-                </div>
-                <div class="form-group">
-                    <button type="submit" name="register" class="btn btn-info btn-lg btn-block">Registrasi</button>
-                </div>
-            </form>
-          </div>
-        </div>
-
-
-        </div>
+            </div>
+            </div>
+         </div>
+    </form>
+    <?php 
+        endforeach; 
+        $_GET["keyword"] = NULL;
+    ?>
     </div>
-</div>
 
-                
 
-<footer class="bg-dark footer-login">
+    <div class="bg-dark">
     <div class="container">
-      <div class="py-4 footer-blog">
+      <div class="p-4 footer-blog">
       <div class="row">
         <div class="col-9">
             <ul class="nav">
@@ -136,9 +125,9 @@
             </ul>
         </div>
         </div>
+      </div>
     </div>
-    </div>
-  </footer>
+  </div>
 
 </body>
 </html>
