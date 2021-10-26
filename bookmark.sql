@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2021 at 01:06 PM
+-- Generation Time: Oct 26, 2021 at 01:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -40,7 +40,17 @@ CREATE TABLE `bookmark` (
 
 INSERT INTO `bookmark` (`id`, `username`, `blog_name`, `status`) VALUES
 (1, 'Fakhrie', 'teh-cocktail', 'OFF'),
-(2, 'harukanakagawa', 'teh-cocktail', 'ON');
+(2, 'harukanakagawa', 'teh-cocktail', 'OFF'),
+(4, 'harukanakagawa12', 'sayur-asem', 'OFF'),
+(6, 'melody', 'bubur-edamame-telur-puyuh', 'OFF'),
+(7, 'melody', 'ayam-krispy-bumbu-cabai', 'ON'),
+(8, 'melody', 'tumis-udang-buncis', 'ON'),
+(9, 'melody', 'tumis-kacang-panjang-dan-tempe', 'OFF'),
+(10, 'akicha', 'sayur-asem', 'ON'),
+(11, 'melody', 'sambal-goreng-tempe', 'ON'),
+(12, 'melody', 'resep-kangkung-krispy', 'ON'),
+(13, 'melody', 'kangkung-bumbu-tauco', 'ON'),
+(14, 'melody', 'kangkung-bumbu-kemiri-pedas', 'ON');
 
 --
 -- Indexes for dumped tables
@@ -60,7 +70,7 @@ ALTER TABLE `bookmark`
 -- AUTO_INCREMENT for table `bookmark`
 --
 ALTER TABLE `bookmark`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

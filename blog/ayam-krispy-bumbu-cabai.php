@@ -3,7 +3,7 @@
     include '../function.php';
     $_SESSION["filename"]=pathinfo(basename(__FILE__),PATHINFO_FILENAME);
     if (isset($_SESSION["username"])){
-    $status = bookmark_check($_SESSION["username"]);
+    $status = bookmark_check($_SESSION["username"], $_SESSION["filename"]);
     }
     
 
@@ -59,14 +59,23 @@
         <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
            <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
         </form>
+
         <span>
+        <?php if (!apply_foto_profil()) : ?>
             <a class="navbar-brand ml-4" href="../login.php">
-              <img class="rounded-circle" src="../img/avatar.jpg" alt="..." height="36" />
+              <img class="rounded-circle" src="../img/avatar.jpg" alt="..." height="36" width="36" />
             </a>
-        </span>
+          <?php else : ?>
+            <a class="navbar-brand ml-4" href="../login.php">
+              <img class="rounded-circle" src="../upload/foto-profil/<?=apply_foto_profil()?>" alt="..." height="36" width="36" />
+            </a>
+            <?php endif ?>
+      </span>
+
       </div>
       </div>
     </nav>
+
 
     <div class="container" id="test" style="margin-top: 110px;">
       <div class="card" style="width: 50rem;">
@@ -130,6 +139,11 @@
           </ol><br>
           <p>Nah, bagaimana mudah bukan? Yuk, buat Ayam Krispy Bumbu Cabai di rumah.</p>
         </div>
+
+
+        <?php var_dump($_SESSION);?>
+
+
         <!-- bookmark button -->
         <?php if (isset($_SESSION["username"])) : ?>
         <div class="container p-3 text-right">
@@ -144,7 +158,7 @@
 
           </h5>
           <input type="hidden" name="status" id="status"/>
-          <input type="hidden" name="blog_name" id="blog_name" value="<?=pathinfo(basename(__FILE__),PATHINFO_FILENAME);?>"/>
+          <input type="text" name="blog_name" id="blog_name" value="<?=pathinfo(basename(__FILE__),PATHINFO_FILENAME);?>"/>
           <input type="hidden" name="username" id="username" class="form-control" placeholder="Enter Name" value="<?= $_SESSION["username"]?>"/>
           <input type="submit" name="submit_bk" id="submit_bk" class="btn btn-info" value="Submit" style="display:none;"/>
           

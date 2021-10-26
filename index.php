@@ -66,10 +66,16 @@
            <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
         </form>
         <span>
+        <?php if (!apply_foto_profil()) : ?>
             <a class="navbar-brand ml-4" href="login.php">
               <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
             </a>
-        </span>
+          <?php else : ?>
+            <a class="navbar-brand ml-4" href="login.php">
+              <img class="rounded-circle" src="upload/foto-profil/<?=apply_foto_profil()?>" alt="..." height="36" width="36" />
+            </a>
+            <?php endif ?>
+      </span>
       </div>
       </div>
     </nav>
@@ -129,7 +135,7 @@
                         <img src="blog/<?php echo $link_img?>" class="card-img-top" alt="...">
                         <div class="card-body">
                           <div class="text-justify">
-                            <a href="blog/<?php echo $card["sumber"].".php"?>" class="text-decoration-none"><h5><?php echo $card["judul"]?></h5></a>
+                            <a href="blog/<?php echo $card["sumber"].".php"?>" class="text-decoration-none hover-orange"><h5><?php echo $card["judul"]?></h5></a>
                             <p><?php echo $card["deskripsi"] ?></p>
                             <?php if ( strlen($card["tag1"])) :?>
                             <input type="submit" class="btn btn-primary" name="submit_ct" value="<?php echo $card["tag1"];?>">  

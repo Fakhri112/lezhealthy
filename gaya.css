@@ -38,8 +38,8 @@ div .card .card-header{
     color: darkorange !important;
 }
 
-.hover-orange:hover{
-    text-decoration: none;
+.text-decoration-none.hover-orange:hover{
+    text-decoration: none !important;
     color: darkorange !important;
 }
 
@@ -94,15 +94,13 @@ div .card .card-header{
 }
 
 .btn-card-no-background{
-padding: 0%;
-margin-right: 100px;
+
 background: unset !important;
 border: unset !important;
 outline: unset !important;
-margin-bottom:.5rem;
 font-family:inherit;
 font-weight:500;
-line-height:1.2;
+
 color:inherit;
 font-size:1.25rem;
 }

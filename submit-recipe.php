@@ -53,11 +53,16 @@ session_start();
            <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
         </form>
         <span>
+        <?php if (!apply_foto_profil()) : ?>
             <a class="navbar-brand ml-4" href="login.php">
-              <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
+              <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" width="36" />
             </a>
-        </span>
-
+          <?php else : ?>
+            <a class="navbar-brand ml-4" href="login.php">
+              <img class="rounded-circle" src="upload/foto-profil/<?=apply_foto_profil()?>" alt="..." height="36" width="36" />
+            </a>
+            <?php endif ?>
+      </span>
       </div>
       </div>
     </nav>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 12, 2021 at 03:28 PM
+-- Generation Time: Oct 26, 2021 at 01:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -41,7 +41,12 @@ CREATE TABLE `tbl_comment` (
 --
 
 INSERT INTO `tbl_comment` (`comment_id`, `parent_comment_id`, `comment`, `comment_sender_name`, `date`, `blog_name`) VALUES
-(112, 0, 'halo', 'harukanakagawa', '2021-10-12 09:00:06', 'teh-cocktail');
+(116, 0, 'Bagus', 'melody', '2021-10-23 08:13:43', 'sayur-asem'),
+(117, 0, 'Jadi Pengen Coba', 'melody', '2021-10-23 08:20:45', 'ayam-krispy-bumbu-cabai'),
+(119, 0, 'EwingHD', 'melody', '2021-10-26 06:28:50', 'sayur-asem'),
+(120, 119, '5 penampakan terseram', 'akicha', '2021-10-26 06:42:28', 'sayur-asem'),
+(121, 0, 'Enak Banget', 'akicha', '2021-10-26 07:35:16', 'tumis-udang-buncis'),
+(122, 121, 'Cobain Aja', 'melody', '2021-10-26 07:35:41', 'tumis-udang-buncis');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +66,7 @@ ALTER TABLE `tbl_comment`
 -- AUTO_INCREMENT for table `tbl_comment`
 --
 ALTER TABLE `tbl_comment`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=123;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

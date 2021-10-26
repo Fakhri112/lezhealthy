@@ -1,15 +1,21 @@
 <?php
   require 'function.php';
 
-  //pagination
-  $jumlahDataPerHalaman = 6;
-  $jumlahData = count(queryResep("SELECT * FROM resep"));
-  $jumlahHalaman = ceil($jumlahData/$jumlahDataPerHalaman);
-  $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
-  $awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
-  
-  if (isset($_GET["keyword"])) {
-     $recipe = cari($_GET["keyword"]);
+  session_start();
+  $conn = mysqli_connect("localhost","root","","food_and_health");
+  $username_profile = $_SESSION["username"];
+  $recipe = queryResep("SELECT blog_name FROM bookmark WHERE username = '$username_profile' AND status = 'ON'");
+  $resep_terkirim = queryResep("SELECT * FROM submit_resep WHERE username = '$username_profile' ORDER BY id DESC");
+  $komentar = queryResep("SELECT * FROM tbl_comment WHERE comment_sender_name = '$username_profile' ORDER BY date DESC");
+
+  if (isset($_POST["submit_pp"])){
+      ubah_foto_profil();
+  }
+  if (isset($_POST["logout"])){
+        session_unset();
+        session_destroy();
+        unset($_POST["logout"]);
+        header("Location:index.php");
   }
 
 ?>
@@ -30,85 +36,89 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="container">
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="container">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item">
-              <a class="nav-link text-white" href="index.php">Home </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="kitchen-tips.php">Kitchen Tips</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="category.php">Category</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link text-white" href="submit-recipe.php">Submit Resep</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tools</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="health-calculator.php">Health Calculator</a>
-                <a class="dropdown-item" href="food-composer.php">Food Composer</a>
-              </div>
-            </li>
-          </ul>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <li class="nav-item">
+            <a class="nav-link text-white" href="index.php">Home </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="kitchen-tips.php">Kitchen Tips</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="category.php">Category</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-white" href="submit-recipe.php">Submit Resep</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Tools</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="health-calculator.php">Health Calculator</a>
+              <a class="dropdown-item" href="food-composer.php">Food Composer</a>
+            </div>
+          </li>
+        </ul>
 
-        <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
-           <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
-        </form>
-        <span>
-            <a class="navbar-brand ml-4" href="login.php">
-              <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" />
-            </a>
-        </span>
-      </div>
-      </div>
-    </nav>
+      <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
+          <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
+      </form>
+
+      <span>
+      <?php if (!apply_foto_profil()) : ?>
+          <a class="navbar-brand ml-4" href="login.php">
+            <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="36" width="36" />
+          </a>
+        <?php else : ?>
+          <a class="navbar-brand ml-4" href="login.php">
+            <img class="rounded-circle" src="upload/foto-profil/<?=apply_foto_profil()?>" alt="..." height="36" width="36" />
+          </a>
+          <?php endif ?>
+      </span>
+
+    </div>
+    </div>
+  </nav>
 
   <div class="container" style="margin-top:110px">
 
-  <div class="d-flex justify-content-end">
-  <button class="btn btn-danger btn-sm">Keluar</button>
-  </div>
-
-
-  <div class="d-flex justify-content-center">
-  <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="100" />
-  </div>
-
-  <div class="d-flex justify-content-center mt-3">
-  <h4>Hello World</h4>
-  </div>
-
-  <div class="d-flex justify-content-center">
-    <form action="" method="post" enctype="multipart/form-data">
-    <input type="submit" name="submit_resep" id="submit_resep" class="btn btn-info" value="Ubah Foto Profil" />
+    <div class="d-flex justify-content-end">
+    <form action="" method="post">
+    <button class="btn btn-danger btn-sm" name="logout" id="logout" value="1">Keluar</button>
     </form>
-  </div>
-
-    <hr/>
-
-        <!-- <nav>
-          <div class="nav nav-tabs bg-warning rounded p-3 mb-3 justify-content-left" id="nav-tab" role="tablist";">
-            <a class="nav-item nav-link select active" id="nav-bookmark-tab" data-toggle="tab" href="#nav-bookmark" role="tab" aria-controls="nav-home" aria-selected="true">Bookmark</a>
-            <a class="nav-item nav-link select" id="nav-komentar-tab" data-toggle="tab" href="#nav-komentar" role="tab" aria-controls="nav-profile" aria-selected="false">Komentar</a>
-            <a class="nav-item nav-link select" id="nav-submit-resep-tab" data-toggle="tab" href="#nav-submit-resep" role="tab" aria-controls="nav-home" aria-selected="false">Resep Terkirim</a>
-            <a class="nav-item nav-link select" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Info User</a>
-          </div>
-        </nav>
-        <div class="tab-content " id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-bookmark" role="tabpanel" aria-labelledby="nav-bookmark-tab"> -->
-
-            
+    </div>
 
 
-            <nav>
+    <div class="d-flex justify-content-center">
+    <?php if (!apply_foto_profil()) : ?>
+      <img class="rounded-circle" src="img/avatar.jpg" alt="..." height="100" />
+    <?php else : ?>
+    <img class="rounded-circle" src="upload/foto-profil/<?=apply_foto_profil()?>" alt="..." height="120" width="120" />
+    <?php endif?>
+
+    </div>
+
+      <div class="d-flex mt-3 justify-content-center">
+      <h4><?=$_SESSION["username"]?></h4>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <form id="form_pp" action="" method="post" enctype="multipart/form-data">
+          <label  class="btn-info p-2 rounded" for="profile_pic">Ubah Foto Profil</label>
+          <input type="file" name="profile_pic" id="profile_pic" value="gambar" style="display: none;">
+          <input type="submit" name="submit_pp" id="submit_pp" value="submit_pp" style="display: none;">
+        </form>
+      </div>
+
+
+      <hr/>
+
+        <nav>
           <div class="nav nav-tabs bg-warning rounded p-3 mb-3 justify-content-left" id="nav-tab" role="tablist";">
             <a class="nav-item nav-link select active ml-2" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Bookmark</a>
             <a class="nav-item nav-link select ml-2" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Komentar</a>
@@ -120,34 +130,55 @@
         <div class="tab-content " id="nav-tabContent">
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
+          <!-- -->
+          <div class="row">
+         <?php foreach($recipe as $card) :?>
+          <div class="col-3">
           <div class="card mb-3" style="width: 250px;">
-              <img src="img/food1.jpg" class="card-img-top" alt="..." />
+              <img src="blog/<?=$card["blog_name"].".jpg"?>" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <?php
+                $blog_name = $card['blog_name'];
+                $nama_resep = queryResep("SELECT * FROM resep WHERE sumber = '$blog_name'")
+                ?>
+                <a href="blog/<?=$card["blog_name"].".php";?>" class="text-decoration-none hover-orange">
+                <h5 class="card-title"><?=$nama_resep[0]["judul"];?></h5>
+                </a>
+                <p class="card-text"><?=$nama_resep[0]["deskripsi"] ?></p>
               </div>
             </div>
+          </div>
+          <?php endforeach?>
+          </div>
+
           </div>
 
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
 
+                <?php foreach($komentar as $comment) :?>
                 <div class="row container">
-                <h5>Cara menang giveaway</h5>
-                    <div class="mt-1 ml-2"><i> 08-01-2022</i></div>
+                <?php 
+                $blog_name = $comment['blog_name'];
+                $nama_resep = queryResep("SELECT * FROM resep WHERE sumber = '$blog_name'");
+                ?>
+                <h5><?=$nama_resep[0]["judul"]?></h5>
+                    <div class="mt-1 ml-2"><i><?=$comment["date"]?></i></div>
                 </div>
-                    halo
-                    <hr>
-
-            <div class="row container">
-                <h5>Cara menang giveaway</h5>
-                    <div class="mt-1 ml-2"><i> 08-01-2022</i></div>
-                </div>
+                <?php if ($comment["parent_comment_id"] == 0) : ?>
+                <?=$comment["comment"]?>
+                <?php else : ?>
                 <div class="row container">
-                    <h6>RE [harukanakagawa] : </h6>
-                    <div class="ml-2"> halo </div>
+                <?php 
+                $parent_comment_id = $comment["parent_comment_id"];
+                $replier = queryResep("SELECT * FROM tbl_comment WHERE comment_id = '$parent_comment_id'");
+                ?>
+                    <h6>RE [<?=$replier[0]["comment_sender_name"];?>] : </h6>
+                    <div class="ml-2"><?=$replier[0]["comment"];?></div>
                 </div>
-                    halo juga
+                    <?=$comment["comment"]?>
+                <?php endif?>
                 <hr>
+                <?php endforeach ?>
                 
           </div>
 
@@ -172,14 +203,19 @@
                 <hr>
           </div>
           <div class="tab-pane fade" id="nav-profile1" role="tabpanel" aria-labelledby="nav-profile1-tab">
-
-                <div class="card mb-3" style="width: 250px;">
-                    <img src="img/food1.jpg" class="card-img-top" alt="..." />
+                
+                <!-- <?php //foreach($resep_terkirim as $submitted) : ?>
+                <div class="card mb-3" style="width: 300px;">
+                    <img src="upload/submit-resep/<?//$submitted["gambar"];?>" class="card-img-top" alt="..." />
                     <div class="card-body">
-                        <button class="btn-card-no-background"data-toggle="modal" data-target=".bd-example-modal-lg">Card Title</button>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <button class="text-left btn-card-no-background"data-toggle="modal" data-target=".bd-example-modal-lg"><?=$submitted["nama_resep"];?></button>
+                        <p class="card-text"><?//$submitted["deskripsi_resep"];?></p>
                     </div>
                 </div>
+                <?php //endforeach;?> -->
+
+
+
                 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
@@ -195,8 +231,6 @@
                         </div>
                     </div>
                 </div>
-
-
 
           </div>
           <div class="tab-pane fade" id="nav-profile2" role="tabpanel" aria-labelledby="nav-profile2-tab">
@@ -260,6 +294,17 @@
   </div>
 
   <script src="bootstrap-show-password.js"></script>
+  <script>
+    document.getElementById("profile_pic").onchange = function() {
+    
+    setTimeout(function(){
+   
+    $('#submit_pp').trigger('click');
+
+    }, 650);
+
+    };
+  </script>
 
 </body>
 </html>
