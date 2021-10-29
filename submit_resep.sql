@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2021 at 01:48 PM
+-- Generation Time: Oct 29, 2021 at 04:07 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -43,7 +43,7 @@ CREATE TABLE `submit_resep` (
 --
 
 INSERT INTO `submit_resep` (`id`, `username`, `nama_resep`, `deskripsi_resep`, `komposisi`, `cara_buat`, `gambar`, `status_resep`) VALUES
-(4, 'melody', 'Kentang Goreng Renyah Ala KFC', 'French fries atau kentang goreng seringkali dijadikan sebagai camilan saat waktu senggang. Apalagi kalau kentang goreng krispi dicampur dengan bumbu keju jadi makin enak. Kentang goreng bisa dibikin sendiri dengan tekstur yang garing di luar dan empuk di dalamnya.', '2 buah kentang ukuran besar\r\nGaram secukupnya\r\nAir secukupnya\r\nMinyak goreng', 'Cuci bersih kentang, Bunda bisa mengupasnya atau tidak. Lalu potong tipis kemudian baru potong panjang.\r\n\r\nRebus air hingga mendidih, dan tambahkan garam secukupnya supaya suhu stabil. Setelah mendidih, rebus kentang sebentar saja. Angkat dan letakkan dalam tray. Dinginkan baru setelah itu masukkan ke dalam freezer.\r\n\r\nPanaskan minyak hingga suhu 170 derajat Celcius. Keluarkan kentang dari freezer, lalu keringkan dengan tisu sebelum digoreng.\r\n\r\nMasukkan kentang jika minyak sudah panas. Goreng hingga kentang mengambang dan berwarna keemasan. Angkat dan tiriskan. Taburkan sedikit garam dan aduk hingga tercampur rata.\r\n\r\nSajikan dengan sambal cocol atau topping kesukaan', 'french-fries-ala-nigella-lawson-1_169.jpeg', 0);
+(4, 'shani_indira', 'Kentang Goreng Renyah Ala KFC', 'French fries atau kentang goreng seringkali dijadikan sebagai camilan saat waktu senggang. Apalagi kalau kentang goreng krispi dicampur dengan bumbu keju jadi makin enak. Kentang goreng bisa dibikin sendiri dengan tekstur yang garing di luar dan empuk di dalamnya.', '2 buah kentang ukuran besar\r\nGaram secukupnya\r\nAir secukupnya\r\nMinyak goreng', 'Cuci bersih kentang, Bunda bisa mengupasnya atau tidak. Lalu potong tipis kemudian baru potong panjang.\r\n\r\nRebus air hingga mendidih, dan tambahkan garam secukupnya supaya suhu stabil. Setelah mendidih, rebus kentang sebentar saja. Angkat dan letakkan dalam tray. Dinginkan baru setelah itu masukkan ke dalam freezer.\r\n\r\nPanaskan minyak hingga suhu 170 derajat Celcius. Keluarkan kentang dari freezer, lalu keringkan dengan tisu sebelum digoreng.\r\n\r\nMasukkan kentang jika minyak sudah panas. Goreng hingga kentang mengambang dan berwarna keemasan. Angkat dan tiriskan. Taburkan sedikit garam dan aduk hingga tercampur rata.\r\n\r\nSajikan dengan sambal cocol atau topping kesukaan', 'french-fries-ala-nigella-lawson-1_169.jpeg', 1);
 
 --
 -- Indexes for dumped tables

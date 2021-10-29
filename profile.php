@@ -224,22 +224,23 @@
             <?php endforeach;?>
             <?php endforeach;?>
 
-            <hr style="border: 5px solid black;">
+            <hr style="border: 5px solid darkorange; border-radius: 5px;">
 
                 <?php foreach($resep_terkirim as $acc) : ?>
                 <?php if ($acc["status_resep"] == 1) : ?>
+                <hr>
                 <div class="row container">
                 <h5>Resep Anda : [<?=$acc["nama_resep"];?>]</h5>
                 </div>
-                    <div class="p-2 text-white bg-success" style="width: 360px;">Sudah Disetujui</div>
-                <hr>
+                    <div class="p-2 text-white bg-success mb-4" style="width: 360px;  border-radius: 3px;">Sudah Disetujui</div>
                 <?php endif?>
                 <?php if ($acc["status_resep"] == 2) : ?>
+                <hr>
                 <div class="row container">
                 <h5>Resep Anda : [<?=$acc["nama_resep"];?>]</h5>
                 </div>
-                    <div class="p-2 text-white bg-danger" style="width: 360px;">Tidak Disetujui</div>
-                <hr>
+                    <div class="p-2 text-white bg-danger mb-4" style="width: 360px; border-radius: 3px;">Tidak Disetujui</div>
+                
                  <?php endif;?>
                 <?php endforeach;?>
 

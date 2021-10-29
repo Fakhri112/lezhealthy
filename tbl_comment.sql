@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2021 at 01:48 PM
+-- Generation Time: Oct 29, 2021 at 04:06 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -41,12 +41,12 @@ CREATE TABLE `tbl_comment` (
 --
 
 INSERT INTO `tbl_comment` (`comment_id`, `parent_comment_id`, `comment`, `comment_sender_name`, `date`, `blog_name`) VALUES
-(116, 0, 'Bagus', 'melody', '2021-10-23 08:13:43', 'sayur-asem'),
-(117, 0, 'Jadi Pengen Coba', 'melody', '2021-10-23 08:20:45', 'ayam-krispy-bumbu-cabai'),
-(119, 0, 'EwingHD', 'melody', '2021-10-26 06:28:50', 'sayur-asem'),
+(116, 0, 'Bagus', 'shani_indira', '2021-10-23 08:13:43', 'sayur-asem'),
+(117, 0, 'Jadi Pengen Coba', 'shani_indira', '2021-10-23 08:20:45', 'ayam-krispy-bumbu-cabai'),
+(119, 0, 'EwingHD', 'shani_indira', '2021-10-26 06:28:50', 'sayur-asem'),
 (120, 119, '5 penampakan terseram', 'akicha', '2021-10-26 06:42:28', 'sayur-asem'),
 (121, 0, 'Enak Banget', 'akicha', '2021-10-26 07:35:16', 'tumis-udang-buncis'),
-(122, 121, 'Cobain Aja', 'melody', '2021-10-26 07:35:41', 'tumis-udang-buncis');
+(122, 121, 'Cobain Aja', 'shani_indira', '2021-10-26 07:35:41', 'tumis-udang-buncis');
 
 --
 -- Indexes for dumped tables

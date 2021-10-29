@@ -209,7 +209,7 @@
         $conn->query($update_data);
         $update_username_bookmark = "UPDATE bookmark SET username = '$username' WHERE username = '$previous_username'";
         $conn->query($update_username_bookmark);
-        $update_username_comment = "UPDATE tbl_comment SET comment_sender_name = '$username' WHERE username = '$previous_username'";
+        $update_username_comment = "UPDATE tbl_comment SET comment_sender_name = '$username' WHERE comment_sender_name = '$previous_username'";
         $conn->query($update_username_comment);
         $update_username_submit_resep = "UPDATE submit_resep SET username = '$username' WHERE username = '$previous_username'";
         $conn->query($update_username_submit_resep);
