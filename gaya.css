@@ -104,3 +104,12 @@ font-weight:500;
 color:inherit;
 font-size:1.25rem;
 }
+
+.komentar-notifikasi{
+    text-decoration: none !important;
+    color: #212429 !important;
+}
+
+.komentar-notifikasi:hover{
+    color: #cc6d00 !important;
+}

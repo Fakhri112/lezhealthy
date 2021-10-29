@@ -2,13 +2,6 @@
   require 'function.php';
   session_start();
 
-  //pagination
-  $jumlahDataPerHalaman = 6;
-  $jumlahData = count(queryResep("SELECT * FROM resep"));
-  $jumlahHalaman = ceil($jumlahData/$jumlahDataPerHalaman);
-  $halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
-  $awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
-  
   if (isset($_GET["keyword"])) {
      $recipe = cari($_GET["keyword"]);
   }

@@ -7,15 +7,25 @@
   $recipe = queryResep("SELECT blog_name FROM bookmark WHERE username = '$username_profile' AND status = 'ON'");
   $resep_terkirim = queryResep("SELECT * FROM submit_resep WHERE username = '$username_profile' ORDER BY id DESC");
   $komentar = queryResep("SELECT * FROM tbl_comment WHERE comment_sender_name = '$username_profile' ORDER BY date DESC");
+  $pengguna = queryResep("SELECT * FROM user WHERE username = '$username_profile'");
+
+  if(isset($_POST["ubah_data"])){
+    unset($_POST["ubah_data"]);
+    ubah_data_pengguna();
+  }
 
   if (isset($_POST["submit_pp"])){
-      ubah_foto_profil();
+      echo ubah_foto_profil();
   }
   if (isset($_POST["logout"])){
         session_unset();
         session_destroy();
         unset($_POST["logout"]);
         header("Location:index.php");
+  }
+  if (isset($_POST["ubah_password"])){
+      unset($_POST["ubah_password"]);
+      ubah_password();
   }
 
 ?>
@@ -27,8 +37,9 @@
     <title>LEZHEALTY</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <style><?php include 'gaya.css'; ?></style>
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     
@@ -161,7 +172,7 @@
                 $blog_name = $comment['blog_name'];
                 $nama_resep = queryResep("SELECT * FROM resep WHERE sumber = '$blog_name'");
                 ?>
-                <h5><?=$nama_resep[0]["judul"]?></h5>
+                <a href="blog/<?=$blog_name.'.php';?>" class="komentar-notifikasi"><h5><?=$nama_resep[0]["judul"]?></h5></a>
                     <div class="mt-1 ml-2"><i><?=$comment["date"]?></i></div>
                 </div>
                 <?php if ($comment["parent_comment_id"] == 0) : ?>
@@ -183,40 +194,67 @@
           </div>
 
           <div class="tab-pane fade" id="nav-profile0" role="tabpanel" aria-labelledby="nav-profile0-tab">
+
+            
+            <?php foreach($komentar as $a) :?>
+
+            <?php 
+            $comment_id = $a["comment_id"];
+            $reply_notification = queryResep("SELECT * FROM tbl_comment WHERE parent_comment_id = '$comment_id'");
+            ?>
+
+            <?php foreach ($reply_notification as $search_filter_comment) : 
+            
+            $blog_name_replied_comment = $search_filter_comment["blog_name"];
+            $blog_replied_comment = queryResep("SELECT * FROM resep WHERE sumber = '$blog_name_replied_comment'");
+
+            ?>
+
             <div class="row container">
-                <h5>Cara menang giveaway</h5>
-                    <div class="mt-1 ml-2"><i> 08-01-2022</i></div>
+              <a href="blog/<?=$blog_name_replied_comment.'.php'?>" class="komentar-notifikasi"><h5><?=$blog_replied_comment[0]["judul"];?></h5></a>
+                    <div class="mt-1 ml-2"><i><?=$search_filter_comment["date"];?></i></div>
                 </div>
                 <div class="row container">
-                    <h6>[harukanakagawa] membalas komentar anda : </h6>
-                    <div class="ml-2"> kamu siapa </div>
+                    <h6>[<?=$search_filter_comment["comment_sender_name"]?>] membalas komentar anda : </h6>
+                    <div class="ml-2"> <?=$a["comment"];?> </div>
                 </div>
-                    aku harugon
+                <?=$search_filter_comment["comment"];?>
                 <hr>
-                            
+            
+            <?php endforeach;?>
+            <?php endforeach;?>
 
+            <hr style="border: 5px solid black;">
+
+                <?php foreach($resep_terkirim as $acc) : ?>
+                <?php if ($acc["status_resep"] == 1) : ?>
                 <div class="row container">
-                <h5>Resep Anda : [Cara Jadi Yutuber]</h5>
-
+                <h5>Resep Anda : [<?=$acc["nama_resep"];?>]</h5>
                 </div>
                     <div class="p-2 text-white bg-success" style="width: 360px;">Sudah Disetujui</div>
                 <hr>
+                <?php endif?>
+                <?php if ($acc["status_resep"] == 2) : ?>
+                <div class="row container">
+                <h5>Resep Anda : [<?=$acc["nama_resep"];?>]</h5>
+                </div>
+                    <div class="p-2 text-white bg-danger" style="width: 360px;">Tidak Disetujui</div>
+                <hr>
+                 <?php endif;?>
+                <?php endforeach;?>
+
           </div>
           <div class="tab-pane fade" id="nav-profile1" role="tabpanel" aria-labelledby="nav-profile1-tab">
                 
-                <!-- <?php //foreach($resep_terkirim as $submitted) : ?>
+                <?php foreach($resep_terkirim as $submitted) : ?>
                 <div class="card mb-3" style="width: 300px;">
-                    <img src="upload/submit-resep/<?//$submitted["gambar"];?>" class="card-img-top" alt="..." />
+                    <img src="upload/submit-resep/<?=$submitted["gambar"]?>" class="card-img-top" alt="..." />
                     <div class="card-body">
-                        <button class="text-left btn-card-no-background"data-toggle="modal" data-target=".bd-example-modal-lg"><?=$submitted["nama_resep"];?></button>
-                        <p class="card-text"><?//$submitted["deskripsi_resep"];?></p>
+                      <a href="javascript:void(0)" data-toggle="modal" data-target=".<?=$submitted["id"]?>" id="lihat-submitted"><h5 class="card-title"><?=$submitted["nama_resep"]?></h5></a>
+                        <p class="card-text"><?=$submitted["deskripsi_resep"];?></p>
                     </div>
                 </div>
-                <?php //endforeach;?> -->
-
-
-
-                <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <div class="modal fade bd-example-modal-lg <?=$submitted["id"]?>" id="targetModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg">
                         <div class="modal-content">
                         <div class="modal-header">
@@ -226,52 +264,95 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            ...
+                          <div><h5>Deskripsi</h5></div>
+                           <p><?=$submitted["deskripsi_resep"];?></p>
+                           <div><h5>Bahan - Bahan : </h5></div>
+                           <p><?=$submitted["komposisi"];?></p>
+                           <div><h5>Cara Buat : </h5></div>
+                           <p><?=$submitted["cara_buat"];?></p>
                         </div>
                         </div>
                     </div>
                 </div>
+                <?php endforeach;?>
 
           </div>
           <div class="tab-pane fade" id="nav-profile2" role="tabpanel" aria-labelledby="nav-profile2-tab">
                 <div class="d-flex justify-content-center">
+                
+                <?php foreach($pengguna as $edit_user): ?>
                 <form action="" method="post" enctype="multipart/form-data">
                     
                     <div class="row">
                     <h6>Username</h6>
                     </div>
                     <div class="row mb-3">
-                    <input type="text" name="username" id="username" class="form-control" style="width: 340px;">
+                    <input type="text" name="username" id="username" class="form-control" style="width: 340px;" value="<?=$edit_user["username"]?>">
                     </div>
                     
-
-                    <h6 class="row">Password</h6>
-                    <div class="row mb-3">
-                    <input type="password" name="password" id="password" class="form-control" data-toggle="password" style="width: 300px;">
-                    <span class="input-group-text"><i class="fa fa-eye"></i></span>
-                    </div>
-
                     <h6 class="row">Email</h6>
                     <div class="row mb-3">
-                    <input type="text" name="email" id="email" class="form-control" style="width: 350px;">
+                    <input type="text" name="email" id="email" class="form-control" style="width: 350px;" value="<?=$edit_user["email"]?>">
                     </div>
 
                     <h6 class="row">No. HP</h6>
                     <div class="row mb-3">
-                    <input type="text" name="nohp" id="nohp" class="form-control" style="width: 350px;">
+                    <input type="text" name="nohp" id="nohp" class="form-control" style="width: 350px;" value="<?=$edit_user["nohp"]?>">
+                    </div>
+                    
+                    <input type="text" name="hash_password" id="hash_password" class="form-control" style="display:none;" value="<?=$edit_user["password"]?>">
+
+                    <div class="row">
+                    <input type="submit" name="ubah_data" id="ubah_data" class="btn btn-info mt-3 mb-4 d-flex" value="Ubah">
+                    <span class="mt-4" style="margin-left: auto;"><a href="javascript:void(0)" data-toggle="modal" data-target="#pass_change"><small>Ubah Password</small></a></span> 
                     </div>
 
-                    <div class="d-flex justify-content-center">
-                    <input type="submit" name="ubah_data" id="ubah_data" class="btn btn-info mt-3 mb-4" value="Ubah">
-                    </div>
+                  </div>
 
                 </form>
+                <?php endforeach; ?>
+                </div>
+
+                <div class="modal fade" id="pass_change" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ubah Password</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                      <form action="" method="post">
+
+                        <div class="container ml-5">
+                        <h6 class="row">Password Lama</h6>
+                        <div class="row mb-3">
+                        <input type="password" name="password_lama" id="password_lama" class="form-control" data-toggle="password" style="width: 300px;">
+                        <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                        </div>
+
+                         <h6 class="row">Password Baru</h6>
+                        <div class="row mb-3">
+                        <input type="password" name="password_baru" id="password_baru" class="form-control" data-toggle="password" style="width: 300px;">
+                        <span class="input-group-text"><i class="fa fa-eye"></i></span>
+                        </div>
+                        </div>
+
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" id="validasi_password" class="btn btn-primary" value="123">Save changes</button>
+                        <input type="text" style="display: none;" name="username_for_password" value="<?=$username_profile;?>">
+                        <input type="submit" style="display: none;" name="ubah_password" id="ubah_password">
+                      </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
           </div>
 
         </div>
     </div>
-
 
     <div class="bg-dark">
     <div class="container">
@@ -295,6 +376,7 @@
 
   <script src="bootstrap-show-password.js"></script>
   <script>
+    $(document).ready(function(){
     document.getElementById("profile_pic").onchange = function() {
     
     setTimeout(function(){
@@ -304,7 +386,30 @@
     }, 650);
 
     };
-  </script>
+    
+    $(document).on('click', '#validasi_password', function(){
 
+
+    if ((document.getElementById("password_baru").value == "") && 
+    (document.getElementById("password_lama").value == "")){
+      alert("Kolom Kosong")
+    }
+    else if(document.getElementById("password_lama").value == "")
+    {
+    alert("Password Lama Kosong")
+    }
+    else if(document.getElementById("password_baru").value == "")
+    {
+    alert("Password Baru Kosong")
+    }
+    else{
+      $('#ubah_password').trigger('click');
+    }
+
+  });
+
+
+});
+</script>
 </body>
 </html>

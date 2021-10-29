@@ -7,6 +7,7 @@ $username = $_POST["username"];
 $status = $_POST["status"];
 $blog_name = $_POST["blog_name"];
 
+echo $username;
 
 $cari_username = "SELECT * FROM bookmark WHERE username = '$username'";
 $cari_blog_name = "SELECT * FROM bookmark WHERE blog_name = '$blog_name'";

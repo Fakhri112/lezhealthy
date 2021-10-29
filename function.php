@@ -171,6 +171,53 @@
         }
     }
 
-   
+
+
+    function ubah_password(){
+        global $conn;
+        $username = $_POST["username_for_password"];
+        $pass_l = $_POST["password_lama"];
+        $pass_b = $_POST["password_baru"];
+
+        $result = $conn->query("SELECT * FROM user WHERE username = '$username'");
+        if(mysqli_num_rows($result)===1)
+        {
+        $row = mysqli_fetch_assoc($result);
+        if(password_verify($pass_l, $row["password"]))
+            {
+                $password = password_hash($pass_b,PASSWORD_DEFAULT);
+                $update_password = "UPDATE user SET password = '$password' WHERE username = '$username'";
+                $conn->query($update_password);
+                echo "<script>alert('Berhasil Diupdate')</script>";
+                // header("Location:profile.php");
+            }
+        if(!password_verify($pass_l, $row["password"])){
+            echo "<script>alert('Password lama tidak cocok')</script>";
+        }
+    }
+}
+
+    function ubah_data_pengguna(){
+        global $conn;
+        $previous_username = $_SESSION["username"];
+        $username = $_POST["username"];
+        $email = $_POST["email"];
+        $nohp = $_POST["nohp"];
+        $hash_password = $_POST["hash_password"];
+
+        $update_data = "UPDATE user SET username = '$username', email = '$email', nohp = '$nohp' WHERE password = '$hash_password'";
+        $conn->query($update_data);
+        $update_username_bookmark = "UPDATE bookmark SET username = '$username' WHERE username = '$previous_username'";
+        $conn->query($update_username_bookmark);
+        $update_username_comment = "UPDATE tbl_comment SET comment_sender_name = '$username' WHERE username = '$previous_username'";
+        $conn->query($update_username_comment);
+        $update_username_submit_resep = "UPDATE submit_resep SET username = '$username' WHERE username = '$previous_username'";
+        $conn->query($update_username_submit_resep);
+
+        $_SESSION["username"] = $username;
+        echo "<script>if(!alert('Berhasil Diupdate'))
+        {window.location.href='profile.php';}</script>";
+       
+    }
 
 ?>
