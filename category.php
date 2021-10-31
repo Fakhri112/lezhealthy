@@ -39,14 +39,6 @@ session_start();
             <li class="nav-item">
               <a class="nav-link text-white" href="submit-recipe.php">Submit Resep</a>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tools</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="healthcalculator.php">Health Calculator</a>
-                <a class="dropdown-item" href="foodcomposer.php">Food Composer</a>
-              </div>
-            </li>
           </ul>
 
         <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
