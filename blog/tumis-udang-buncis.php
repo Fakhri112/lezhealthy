@@ -139,8 +139,11 @@
          <input type="hidden" name="blog_name" id="blog_name" value="<?=pathinfo(basename(__FILE__),PATHINFO_FILENAME);?>"/>
          <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
         </div>
+
        </form>
+       
       </div>
+
   <?php else : ?>
     <div class="container mt-3">
       <div class="card-body" style="background-color: rgba(210, 199, 147, 0.8);">
@@ -156,6 +159,7 @@
 
   <!-- show comment -->
   <div class="container">
+  <hr style="border: 2px solid gray; border-radius: 5px; width: 840px; display: inline-block;" class="mt-2 mb-2">
   <div id="display_comment"></div>
   </div>
 

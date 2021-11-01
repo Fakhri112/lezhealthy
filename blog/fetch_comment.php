@@ -21,7 +21,8 @@ foreach($result as $row)
   <div class="card-body">'.$row["comment"];
   if (isset($_SESSION["username"])){
     $output .= '<div class="panel-footer" align="right">
-    <button type="button" class="btn btn-default reply" id="'.$row["comment_id"].'">Reply</button></div>
+    <button type="button" class="btn btn-default reply" id="'.$row["comment_id"].'">Reply</button>
+    <button type="button" class="btn btn-danger delete" id="'.$row["comment_id"].'">Delete</button></div>
     </div></div>';
     if (!empty($_POST["id"]) && $_POST["id"]==$row["comment_id"]){
       $output .='<div style="margin-left: 48px; width: 50rem">
