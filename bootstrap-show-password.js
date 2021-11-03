@@ -1,12 +1,5 @@
-/**
- * @author Abdo-Hamoud <abdo.host@gmail.com>
- * https://github.com/Abdo-Hamoud/bootstrap-show-password
- * version: 1.0
- */
-
 !function ($) {
-//eyeOpenClass: 'fa-eye',
-//eyeCloseClass: 'fa-eye-slash',
+
     'use strict';
 
     $(function () {

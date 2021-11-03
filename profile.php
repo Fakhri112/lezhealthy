@@ -17,6 +17,11 @@
   if (isset($_POST["submit_pp"])){
       echo ubah_foto_profil();
   }
+
+  if (isset($_POST["hapus_pp"])){
+    echo hapus_foto_profil();
+}
+
   if (isset($_POST["logout"])){
         session_unset();
         session_destroy();
@@ -26,6 +31,9 @@
   if (isset($_POST["ubah_password"])){
       unset($_POST["ubah_password"]);
       ubah_password();
+  }
+  if (!isset($_SESSION["username"])){
+    header("Location:index.php");
   }
 
 ?>
@@ -111,10 +119,14 @@
       </div>
 
       <div class="d-flex justify-content-center">
-        <form id="form_pp" action="" method="post" enctype="multipart/form-data">
-          <label  class="btn-info p-2 rounded" for="profile_pic">Ubah Foto Profil</label>
+        <form action="" method="post" enctype="multipart/form-data">
+          <label  class="btn-info p-2 rounded-left" for="profile_pic">Ubah Foto Profil</label>
           <input type="file" name="profile_pic" id="profile_pic" value="gambar" style="display: none;">
           <input type="submit" name="submit_pp" id="submit_pp" value="submit_pp" style="display: none;">
+        </form>
+        <form action="" method="post">
+            <label  class="btn-danger p-2 rounded-right" for="hapus_pp">Hapus Foto Profil</label>
+            <input type="submit" name="hapus_pp" id="hapus_pp" value="hapus" style="display: none;"> 
         </form>
       </div>
 
@@ -218,6 +230,7 @@
 
             <hr style="border: 5px solid darkorange; border-radius: 5px;">
 
+                <!-- jika status resep = 1 maka resep diterima, jika status resep 2 maka resep ditolak -->
                 <?php foreach($resep_terkirim as $acc) : ?>
                 <?php if ($acc["status_resep"] == 1) : ?>
                 <hr>
@@ -296,7 +309,8 @@
                     <input type="text" name="hash_password" id="hash_password" class="form-control" style="display:none;" value="<?=$edit_user["password"]?>">
 
                     <div class="row">
-                    <input type="submit" name="ubah_data" id="ubah_data" class="btn btn-info mt-3 mb-4 d-flex" value="Ubah">
+                    <button type="button" id="validasi"class="btn btn-info mt-3 mb-4 d-flex" value="Ubah">Ubah</button>
+                    <input type="submit" style="display: none;" name="ubah_data" id="ubah_data" value="Ubah">
                     <span class="mt-4" style="margin-left: auto;"><a href="javascript:void(0)" data-toggle="modal" data-target="#pass_change"><small>Ubah Password</small></a></span> 
                     </div>
 
@@ -370,19 +384,37 @@
   <script src="bootstrap-show-password.js"></script>
   <script>
     $(document).ready(function(){
-    document.getElementById("profile_pic").onchange = function() {
+
+
+    $(document).on('click', '#validasi', function(){
+      
+
+    var string_user = document.getElementById("username").value;
+    var string_email = document.getElementById("email").value;
+    var string_nohp = document.getElementById("nohp").value;
+
+    if((string_email == "" && string_nohp == "" && string_user == "")){
+      alert("Periksa kembali kolom yang kosong");
+    }
+    else if(string_email == "" || string_nohp == ""|| string_user ==""){
+      alert("Periksa kembali kolom yang kosong");
+    }
+    else if (/\s/.test(string_user)) {
+      alert("Username terdapat spasi");
+        
+    }
+    else if(!(/^\d+$/.test(string_nohp))){
+      alert("Nomor hape tidak valid");
+    }
+    else{
+      $('#ubah_data').trigger('click');
+    }    
+
+
+    });
+
+    document.getElementById("validasi_password").onclick = function(){
     
-    setTimeout(function(){
-   
-    $('#submit_pp').trigger('click');
-
-    }, 650);
-
-    };
-    
-    $(document).on('click', '#validasi_password', function(){
-
-
     if ((document.getElementById("password_baru").value == "") && 
     (document.getElementById("password_lama").value == "")){
       alert("Kolom Kosong")
@@ -399,10 +431,28 @@
       $('#ubah_password').trigger('click');
     }
 
-  });
+  };
 
+  document.getElementById("profile_pic").onchange = function() {
+    
+    setTimeout(function(){
+   
+    $('#submit_pp').trigger('click');
+
+    }, 650);
+
+    };
+
+    document.getElementById("hapus_profile_pic").onchange = function() {
+   
+    $('#hapus_pp').trigger('click');
+
+    };
 
 });
+
+
+
 </script>
 </body>
 </html>

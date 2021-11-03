@@ -3,9 +3,8 @@
     //inisialisasi koneksi mysqli
     $conn = mysqli_connect("localhost","root","","food_and_health");
 
-    //baca dan masukkan query resep
+    //baca dan masukkan query yang dipanggil
     function queryResep($x){
-
     global $conn;  
     $result = $conn->query($x);
     $rows = [];
@@ -15,7 +14,7 @@
     return $rows;
     }
 
-    //cari keyword
+    //cari keyword resep
     function cari($x){
         $query = "SELECT * FROM resep WHERE 
                     judul LIKE '%$x%' OR
@@ -26,6 +25,12 @@
                     tag4 LIKE '%$x%'
                 ";
         return queryResep($query);
+    }
+    // cari kitchen tips
+    function cari_kt($x){
+        $query = "SELECT * FROM kitchen_tips WHERE judul LIKE '%$x%'";
+        return queryResep($query);
+
     }
 
     //kirim status bookmark
@@ -62,7 +67,6 @@
             {
                 $_SESSION["username"] = $username;
                 header("Location:index.php");
-            exit;
             }
         }
     }
@@ -70,22 +74,45 @@
     //register function
     function register(){
         global $conn;
-        $username = stripslashes($_POST["username"]);
+        $username = strtolower(stripslashes($_POST["username"]));
         $password = $conn->real_escape_string($_POST["password"]);
+
+
+        $ambil_data_user = queryResep("SELECT username FROM user");
+        $ambil_data_email = queryResep("SELECT email FROM user");
+
+        foreach($ambil_data_user as $a){
+            if ($a["username"]==$username){
+                echo "<script>if(!alert('Username sudah terdaftar'))
+                {window.location.href='login.php';}</script>";
+                return false;
+            }
+        }
         if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-            $emailErr = "Invalid email format";
+            echo "<script>if(!alert('Email tidak valid'))
+            {window.location.href='login.php';}</script>";
+            return "halo0";
           }
         else{
-            $email = $_POST["email"];
+            $email = $_POST["email"]; 
         }
-
+        foreach($ambil_data_email as $b){
+            if ($b["email"]==$email){
+                echo "<script>if(!alert('Email sudah terdaftar'))
+                {window.location.href='login.php';}</script>";
+                return false;
+            }
+        }
+        
         $password = password_hash($password,PASSWORD_DEFAULT);
         $insert = "INSERT INTO user (username, password, email) VALUES ('$username', '$password', '$email')";
         $conn->query($insert);
         $_SESSION["username"] = $username;
         header("Location:index.php");
+        
     }
 
+    //mengirimkan resep
     function kirim_resep(){
         global $conn;
         $username = $_POST["username"];
@@ -107,6 +134,7 @@
 
     }
 
+    //memvalidasi gambar
     function gambar_validasi(){
         $namafile = $_FILES["gambar"]["name"];
         $error = $_FILES["gambar"]["error"];
@@ -128,9 +156,12 @@
         return $namafile;
     }
 
+    //ubah foto profil
     function ubah_foto_profil(){
         global $conn;
         $username = $_SESSION["username"];
+
+
         $namafile = $_FILES["profile_pic"]["name"];
         $error = $_FILES["profile_pic"]["error"];
         $tmpName = $_FILES["profile_pic"]["tmp_name"];
@@ -141,15 +172,16 @@
 
         }
         $allowedextension = ['jpg', 'jpeg', 'png', 'jfif'];
-        $extension = pathinfo($namafile,PATHINFO_EXTENSION);
-        if (!in_array($extension, $allowedextension)){
-            echo "<script>alert('Format file tidak mendukung');</script>";
-            return false;
+        $extension = strtolower(pathinfo($namafile,PATHINFO_EXTENSION));
+        if (!in_array($extension, $allowedextension)){ 
+            return "<script>alert('Format file tidak mendukung');</script>";
         }
-
+        $user_data = queryResep("SELECT * FROM user WHERE username = '$username'");
+        $namafile = $user_data[0]["username"].".".pathinfo($namafile, PATHINFO_EXTENSION);
         $update = "UPDATE user SET gambar = '$namafile' WHERE username = '$username'";
         $conn->query($update);
         move_uploaded_file($tmpName, 'upload/foto-profil/'.$namafile);
+        return "<script>alert('Foto Profil Ditambahkan');</script>";
     }
 
     function apply_foto_profil(){
@@ -169,6 +201,29 @@
         else{
             return false;
         }
+
+    }
+
+    function hapus_foto_profil(){
+        global $conn;
+        $username = $_SESSION["username"];
+        $pilih_user = queryResep("SELECT * FROM user WHERE username = '$username'");
+        if ($pilih_user[0]["gambar"]==""){
+            return "<script>alert('Tidak ada foto profil dihapus');</script>";
+        }else{
+        unlink("upload/foto-profil/".$pilih_user[0]['gambar']);
+        }
+
+        $hapus = "UPDATE user SET gambar='' WHERE username = '$username'";
+        if($conn->query($hapus) === TRUE){
+            return "<script>alert('Berhasil Hapus Foto Profil');</script>";
+        }
+        else{
+            return "<script>alert('Gagal Hapus Foto Profil');</script>";
+        }
+
+
+
     }
 
 
@@ -201,9 +256,41 @@
         global $conn;
         $previous_username = $_SESSION["username"];
         $username = $_POST["username"];
-        $email = $_POST["email"];
         $nohp = $_POST["nohp"];
         $hash_password = $_POST["hash_password"];
+
+        $ambil_data_user = queryResep("SELECT username FROM user WHERE username <>'$username'");
+        $ambil_data_nohp = queryResep("SELECT nohp FROM user");
+        foreach($ambil_data_user as $a){
+            if ($a["username"]==$username){
+                echo "<script>if(!alert('Username sudah terdaftar'))
+                {window.location.href='login.php';}</script>";
+                return false;
+            }
+        }
+        if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+            echo "<script>if(!alert('Email tidak valid'))
+            {window.location.href='login.php';}</script>";
+            return "halo0";
+          }
+        else{
+            $email = $_POST["email"]; 
+        }
+        $ambil_data_email = queryResep("SELECT email FROM user WHERE email<>'$email'");
+        foreach($ambil_data_email as $b){
+            if ($b["email"]==$email){
+                echo "<script>if(!alert('Email sudah terdaftar'))
+                {window.location.href='login.php';}</script>";
+                return false;
+            }
+        }
+        foreach($ambil_data_nohp as $c){
+            if ($c["nohp"]==$nohp){
+                echo "<script>if(!alert('Nomor HP sudah terdaftar'))
+                {window.location.href='login.php';}</script>";
+                return false;
+            }
+        }
 
         $update_data = "UPDATE user SET username = '$username', email = '$email', nohp = '$nohp' WHERE password = '$hash_password'";
         $conn->query($update_data);

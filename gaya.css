@@ -9,12 +9,17 @@
 }
 
 .d-block.w-100.tahukahkamu{
-    filter: brightness(60%);
+    filter: brightness(80%) !important;
 }
 
 .btn-default {
     background-color: blue;
     color: white;
+}
+.btn.btn-danger.delete:hover{
+    background-color: #ebebeb;
+    color: #333;
+    border-color: #adadad;
 }
 .card.mt-3{
     border: 1px solid black;

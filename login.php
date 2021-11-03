@@ -2,15 +2,16 @@
   session_start();
   require 'function.php';
 
+  if(isset($_SESSION["username"])){
+    header("Location:profile.php");
+  }
   if(isset($_POST["login"])) {
     login();
   }
   if(isset($_POST["register"])){
-    register();
+    var_dump(register());
   }
-  if(isset($_SESSION["username"])){
-    header("Location:profile.php");
-  }
+
 
 ?>
 
@@ -77,7 +78,7 @@
           <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
           <form action="" method="post">
                 <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
+                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username_login" type="text">
                 </div>
                 <div class="form-group">
                     <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
@@ -90,20 +91,25 @@
           <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
           <form action="" method="post">
                 <div class="form-group">
-                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username" type="text">
+                    <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Username" name="username" id="username_register" type="text">
                 </div>
                 <div class="form-group">
-                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password" type="password">
+                    <input class="form-control form-control-lg" placeholder="Password" name="password" id="password_register" type="password">
                 </div>
                 <div class="form-group">
                     <input _ngcontent-c0="" class="form-control form-control-lg" placeholder="Email" name="email" id="email" type="text">
                 </div>
                 <div class="form-group">
-                    <button type="submit" name="register" class="btn btn-info btn-lg btn-block">Registrasi</button>
+                <button type="button" id="validasi"class="btn btn-info btn-lg btn-block">Registrasi</button>
+                <button type="submit" style="display:none;" name="register" id="register" class="btn btn-info btn-lg btn-block"></button>
                 </div>
             </form>
           </div>
         </div>
+
+        <?php 
+
+        ?>
 
 
         </div>
@@ -131,6 +137,37 @@
     </div>
     </div>
   </footer>
+
+<script>
+$(document).ready(function(){
+
+  $(document).on('click', '#validasi', function(){
+
+
+    var string_user = document.getElementById("username_register").value;
+    var string_pass = document.getElementById("password_register").value;
+    var string_email = document.getElementById("email").value;
+
+
+    if((string_email == "" && string_pass == "" && string_user == "")){
+      alert("Periksa kembali kolom yang kosong");
+    }
+    else if(string_email == "" || string_pass == ""|| string_user ==""){
+      alert("Periksa kembali kolom yang kosong");
+    }
+    else if (/\s/.test(string_user)) {
+      alert("Username terdapat spasi");
+        
+    }
+    else{
+      $('#register').trigger('click');
+  }    
+
+
+  });
+
+});
+</script>
 
 </body>
 </html>

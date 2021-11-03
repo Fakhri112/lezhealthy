@@ -46,14 +46,6 @@
             <li class="nav-item">
               <a class="nav-link text-white" href="../submit-recipe.php">Submit Resep</a>
             </li>
-            <!-- <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Tools</a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="../health-calculator.php">Health Calculator</a>
-                <a class="dropdown-item" href="../food-composer.php">Food Composer</a>
-              </div>
-            </li> -->
           </ul>
 
         <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
@@ -146,6 +138,7 @@
          <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
         </div>
        </form>
+       <hr style="border: 2px solid gray; border-radius: 5px; width: 840px; display: inline-block;" class="mt-2 mb-2">
       </div>
   <?php else : ?>
     <div class="container mt-3">

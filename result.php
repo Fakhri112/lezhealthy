@@ -4,6 +4,7 @@
 
   if (isset($_GET["keyword"])) {
      $recipe = cari($_GET["keyword"]);
+     $kitchen_tips = cari_kt($_GET["keyword"]);
   }
 
 ?>
@@ -108,7 +109,47 @@
                 
           </div>
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-            
+
+                    <?php foreach($kitchen_tips as $a):?>
+                    <div class="container">
+                      
+                    
+                  <div class="card mb-3" style="max-width: 700px;">
+                      <div class="row no-gutters">
+                      <div class="col-md-4">
+                          <img src="kitchen-tips/<?=$a["gambar"].".jpg"?>" class="card-img" alt="...">
+                      </div>
+                      <div class="col-md-8">
+                          <div class="card-body">
+                          <h5 class="card-title"><?=$a["judul"];?></h5>
+                          <a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target=".<?=$a["id"];?>">Baca Selengkapnya</a>
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+              
+
+              <div class="modal fade <?=$a["id"];?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel"><?=$a["judul"];?></h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+
+                  <?=$a["deskripsi"]?>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <?php endforeach?>
+
           </div>
         </div>
     </div>

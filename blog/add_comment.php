@@ -2,12 +2,13 @@
 
 //add_comment.php
 
-$connect = mysqli_connect("localhost","root","","food_and_health");
+$conn = mysqli_connect("localhost","root","","food_and_health");
 
 $kosong = '';
 $comment_name = '';
 $comment_content = '';
 $blog_name = '';
+
 
 if(empty($_POST["comment_name"]))
 {
@@ -31,7 +32,7 @@ if($kosong == '')
 {
  $query = "INSERT INTO tbl_comment (parent_comment_id, comment, comment_sender_name, blog_name) 
  VALUES (?, ?, ?, ?)";
- $statement = $connect->prepare($query);
+ $statement = $conn->prepare($query);
  $statement->bind_param("ssss", $parent_comment_id, $comment, $comment_sender_name, $blog_name);
 
 $parent_comment_id = $_POST["comment_id"];
@@ -45,5 +46,8 @@ $statement->execute();
 $data = array('kosong1'  => $kosong);
 
 echo json_encode($data);
+
+
+
 
 ?>

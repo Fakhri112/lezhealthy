@@ -98,24 +98,24 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="d-block w-100 tahukahkamu" src="img/food3.jpg" alt="First slide">
+                    <img class="d-block w-100 tahukahkamu" src="img/1.jpg" alt="First slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Tahukah Kamu #1</h5>
-                        <p>The whole caption will only show up if the screen is at least medium size.</p>
+                        <p>Makan pemanis dapat membuat Anda buang air besar</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tahukahkamu" src="img/food2.jpg" alt="Second slide">
+                    <img class="d-block w-100 tahukahkamu" src="img/2.jpg" alt="Second slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Tahukah Kamu #2</h5>
-                        <p>The whole caption will only show up if the screen is at least medium size.</p>
+                        <p>Paprika merah mengandung 2,5 kali lebih banyak vitamin C daripada jeruk</p>
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="d-block w-100 tahukahkamu" src="img/food1.jpg" alt="Third slide">
+                    <img class="d-block w-100 tahukahkamu" src="img/3.jpg" alt="Third slide">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Tahukah Kamu #3</h5>
-                        <p>The whole caption will only show up if the screen is at least medium size.</p>
+                        <p>Keju adalah makanan yang paling sering dicuri di dunia</p>
                     </div>
                 </div>
             </div>
@@ -177,37 +177,41 @@
         <div class="row row-cols-1 row-cols-md-1 g-4">
           <div class="col mb-3">
             <div class="card">
-              <img src="img/food1.jpg" class="card-img-top" alt="..." />
+              <img src="blog/kangkung-bumbu-tauco.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <a href="blog/kangkung-bumbu-tauco.php" class="text-decoration-none hover-orange">
+                <h5 class="card-title">Kangkung Bumbu Tauco</h5></a>
+                <p class="card-text">Kangkung bumbu tauco. kangkung Tak jauh berbeda dengan jenis sayuran lainnya, sayuran yang punya nama latin Ipomoea aquatica ini mengandung sejumlah nutrisi yang baik bagi tubuh.</p> 
               </div>
             </div>
           </div>
           <div class="col mb-3">
             <div class="card">
-              <img src="img/food2.jpg" class="card-img-top" alt="..." />
+              <img src="blog/teh-cocktail.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <a href="blog/teh-cocktail.php" class="text-decoration-none hover-orange">
+                <h5 class="card-title">Teh Cocktail</h5></a>
+                <p class="card-text">Cocktail buah atau koktil adalah makanan yang terbuat dari potongan buah dan sirup serta disajikan dalam keadaan dingin.</p> 
               </div>
             </div>
           </div>
           <div class="col mb-3">
             <div class="card">
-              <img src="img/food3.jpg" class="card-img-top" alt="..." />
+              <img src="blog/resep-kangkung-krispy.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                <a href="blog/resep-kangkung-krispy.php" class="text-decoration-none hover-orange">
+                <h5 class="card-title">Resep Kangkung Krispy</h5></a>
+                <p class="card-text">Kangkung merupakan salah satu tanaman yang banyak ditemui di negara-negara Asia, khususnya di Indonesia. Dikutip dari situs Data Komposisi Pangan Indonesia, berikut ini adalah kandungan gizi yang terdapat pada 100 gram (g) kangkung segar.</p> 
               </div>
             </div>
           </div>
           <div class="col mb-3">
             <div class="card">
-              <img src="img/Fruit.jpg" class="card-img-top" alt="..." />
+              <img src="blog/sayur-asem.jpg" class="card-img-top" alt="..." />
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <a href="blog/sayur-asem.php" class="text-decoration-none hover-orange">
+                <h5 class="card-title">Sayur Asem</h5></a>
+                <p class="card-text">Sayur asem adalah satu di antara menu masakan yang memiliki rasa asam, tetapi ada pula yang membuatnya menjadi pedas. Masakan ini terdiri dari berbagai campuran sayur-sayuran dan kacang-kacangan.</p> 
               </div>
             </div>
           </div>

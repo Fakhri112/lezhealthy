@@ -101,8 +101,8 @@
          </div>
     </form>
     <?php 
-        endforeach; 
-        $_GET["keyword"] = NULL;
+     endforeach; 
+     $_GET["keyword"] = NULL;
     ?>
     </div>
 

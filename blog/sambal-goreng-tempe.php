@@ -157,6 +157,7 @@
          <input type="submit" name="submit" id="submit" class="btn btn-info" value="Submit" />
         </div>
        </form>
+       <hr style="border: 2px solid gray; border-radius: 5px; width: 840px; display: inline-block;" class="mt-2 mb-2">
       </div>
   <?php else : ?>
     <div class="container mt-3">

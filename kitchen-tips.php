@@ -3,10 +3,13 @@
 require 'function.php';
 session_start();
 
-if (!isset($_SESSION["username"])){
-  header("Location:login.php");
-}
+$jumlahDataPerHalaman = 7;
+$jumlahData = count(queryResep("SELECT * FROM kitchen_tips"));
+$jumlahHalaman = ceil($jumlahData/$jumlahDataPerHalaman);
+$halamanAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($jumlahDataPerHalaman*$halamanAktif)-$jumlahDataPerHalaman;
 
+$list_kitchen_tips = queryResep("SELECT * FROM kitchen_tips ORDER BY id DESC LIMIT $awalData, $jumlahDataPerHalaman");
 
 ?>
 
@@ -64,56 +67,86 @@ if (!isset($_SESSION["username"])){
     </nav>
 
     <div class="container" style="margin-top: 110px;">
-        <h3>Submit Resep</h3>
-        <p class="mb-4">Admin akan mereview resep yang anda kirimkan. Kami akan mengirimkan anda notifikasi apabila resep yang anda kirimkan sudah disetujui untuk ditambahkan ke database blog kami</p>
+        <h3>Kitchen Tips</h3>
+        <p>Temukan beragam tips-tips seputar dapur disini</p>
         <hr>
-        <div class="d-flex justify-content-center">
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="mb-3">
-            <h6>Nama Resep</h6>
-            <input class="form-control" id="nama_resep" name="nama_resep"style="width: 500px;" autocomplete="off">
-            </div>
-
-            <div class="mb-3">
-            <h6>Deskripsi</h6>
-            <textarea class="form-control" id="deskripsi_resep" name="deskripsi_resep"style="width: 500px; height:110px;"></textarea>
-            </div>
-            
-            <div class="mb-3">
-            <h6>Bahan-Bahan</h6>
-            <textarea class="form-control" id="komposisi" name="komposisi"style="width: 500px; height:110px;"></textarea>
-            </div>
-
-            <div class="mb-3">
-            <h6>Cara-Pembuatan</h6>
-            <textarea class="form-control" id="cara_buat" name="cara_buat"style="width: 500px; height:110px;"></textarea>
-            </div>
-
-            <div class="mb-3">
-            <h6>Masukkan Gambar</h6>
-            <input id="gambar" name="gambar" type="file" />
-            </div>
-
-            <input type="hidden" name="username" id="username" class="form-control" placeholder="Enter Name" value="<?= $_SESSION["username"]?>"/>
-            <input type="hidden" name="status_resep" id="status_resep" class="form-control" placeholder="Enter Name" value="0"/>
-
-            <div class="d-flex justify-content-center">
-            <input type="submit" name="submit_resep" id="submit_resep" class="btn btn-info mt-3" value="Submit" />
-            </div>
-
-        </form>
-        </div>
     </div>
 
-    <?php 
-    if( isset($_POST["submit_resep"])){
-        kirim_resep();
-    }
-    ?>
+        <?php foreach($list_kitchen_tips as $a):?>
+          <div class="container">
+            
+          
+        <div class="card mb-3" style="max-width: 700px;">
+            <div class="row no-gutters">
+            <div class="col-md-4">
+                <img src="kitchen-tips/<?=$a["gambar"].".jpg"?>" class="card-img" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                <h5 class="card-title"><?=$a["judul"];?></h5>
+                <a href="javascript:void(0)" class="btn btn-primary" data-toggle="modal" data-target=".<?=$a["id"];?>">Baca Selengkapnya</a>
+                </div>
+            </div>
+            </div>
+         </div>
+    </div>
+    
 
-  <footer class="bg-dark mt-auto">
+    <div class="modal fade <?=$a["id"];?>" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"><?=$a["judul"];?></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <?=$a["deskripsi"]?>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+<?php endforeach?>
+
+<nav aria-label="...">
+  <ul class="pagination mt-3 justify-content-center">
+  <?php if($halamanAktif > 1 ) : ?>
+      <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif-1 ?>">Previous</a></li>
+      <?php else : ?>
+      <li class="page-item disabled"><a class="page-link" href="?halaman=<?= $halamanAktif-1 ?>">Previous</a></li>
+      <?php endif;?>
+    <?php for($i=1;$i<=$jumlahHalaman;$i++) :?>
+    <?php if ($i == $halamanAktif) :?>
+        <li class="page-item active">
+          <a class="page-link" href="?halaman=<?=$i?>"> <?=$i ?><span class="sr-only">(current)</span></a>
+        </li>
+    <?php else :?>
+        <li class="page-item"><a class="page-link" href="?halaman=<?=$i?>"><?=$i ?></a></li>
+    <?php endif?>
+    <?php endfor?> 
+    <?php if($halamanAktif < $jumlahHalaman ) : ?>
+        <li class="page-item"><a class="page-link" href="?halaman=<?= $halamanAktif+1 ?>">Next</a></li>
+    <?php else : ?>
+        <li class="page-item disabled"><a class="page-link" href="?halaman=<?= $halamanAktif-1 ?>">Next</a></li>
+    <?php endif;?>
+  </ul>
+</nav>
+
+
+
+
+
+
+
+
+
+<footer class="bg-dark">
     <div class="container">
-      <footer class="py-4 footer-blog">
+      <div class="py-4 footer-blog">
       <div class="row">
         <div class="col-9">
             <ul class="nav">
@@ -127,7 +160,7 @@ if (!isset($_SESSION["username"])){
             </ul>
         </div>
         </div>
-      </footer>
+    </div>
     </div>
   </footer>
 
