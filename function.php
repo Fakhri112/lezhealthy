@@ -204,6 +204,26 @@
 
     }
 
+    function apply_foto_profil_komentar($x){
+        error_reporting(0);
+        global $conn;
+        $username = $x;
+        $result = $conn->query("SELECT * FROM user WHERE username = '$username'");
+        $rows = [];
+        while ($row = $result -> fetch_assoc()){
+            $rows[] = $row;
+        }
+
+        if (isset($rows[0]["gambar"])) {
+            $namafile = $rows[0]["gambar"];
+            return $namafile;
+        }
+        else{
+            return false;
+        }
+
+    }
+
     function hapus_foto_profil(){
         global $conn;
         $username = $_SESSION["username"];

@@ -195,8 +195,8 @@
       <div class="row">
         <div class="col-9">
             <ul class="nav">
-            <li class="nav-item"><a href="../contact.php" class="nav-link px-2 text-muted contact-about">Contact</a></li>
-            <li class="nav-item"><a href="../about.php" class="nav-link px-2 text-muted contact-about">About</a></li>
+            <li class="nav-item"><a href="javascript:void(0)" class="nav-link px-2 text-muted contact-about" data-toggle="modal" data-target=".contact">Contact</a></li>
+            <li class="nav-item"><a href="javascript:void(0)" class="nav-link px-2 text-muted contact-about" data-toggle="modal" data-target=".about">About</a></li>
             </ul>
         </div>
         <div class="col-3">
@@ -208,6 +208,45 @@
       </footer>
     </div>
   </footer>
+
+  <div class="modal fade contact" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog custom" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Contact</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <h4>Untuk info lebih lanjut hubungi Call Center kami berikut</h4>
+        <br>
+        <p>08123333444556 (Randu)</p>
+        <p>08123456789990 (Farhan)</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade about" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal-dialog custom" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-center">
+      <h4>Lezhealty</h4>
+      <br>
+        <p>Temukan beragam resep favorit anda disini</p>
+        <p>Nikmati fitur-fitur kami yang lain ya!</p>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 <script src="../comment_script.js"></script>

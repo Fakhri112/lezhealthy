@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-
+require '../function.php';
 $connect = new PDO('mysql:host=localhost;dbname=food_and_health', 'root', '');
 
 $blog_name = $_SESSION["filename"];
@@ -16,8 +16,14 @@ foreach($result as $row)
 {
  $output .= '
 
-<div class="card mt-3" style="width: 53rem">
-  <div class="card-head bg-secondary text-white p-3">By <b>'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>
+<div class="card mt-3" style="width: 53rem">';
+  if (!apply_foto_profil_komentar($row["comment_sender_name"])){
+  $output .='<div class="card-head bg-secondary text-white p-3"><img class="rounded-circle" src="../img/avatar.jpg" alt="..." height="26" width="26" /><b class="ml-2">'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>';
+  }
+  else{
+    $output .='<div class="card-head bg-secondary text-white p-3"><img class="rounded-circle" src="../upload/foto-profil/'.apply_foto_profil_komentar($row["comment_sender_name"]).'" alt="..." height="36" width="36" /><b class="ml-2">'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>';
+  }
+  $output.='
   <div class="card-body">'.$row["comment"];
   if (isset($_SESSION["username"])){
     $output .= '<div class="panel-footer" align="right">';
@@ -81,9 +87,14 @@ function get_reply_comment($connect, $parent_id = 0, $marginleft = 0)
   foreach($result as $row)
   {
    $output .= '
-   <div class="card mt-3" style="margin-left:'.$marginleft.'px; width: 50rem">
-    <div class="bg-secondary text-white p-3">By <b>'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>
-    <div class="card-body">'.$row["comment"];
+   <div class="card mt-3" style="margin-left:'.$marginleft.'px; width: 50rem">';
+   if (!apply_foto_profil_komentar($row["comment_sender_name"])){
+    $output .='<div class="card-head bg-secondary text-white p-3"><img class="rounded-circle" src="../img/avatar.jpg" alt="..." height="26" width="26" /><b class="ml-2">'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>';
+    }
+    else{
+      $output .='<div class="card-head bg-secondary text-white p-3"><img class="rounded-circle" src="../upload/foto-profil/'.apply_foto_profil_komentar($row["comment_sender_name"]).'" alt="..." height="36" width="36" /><b class="ml-2">'.$row["comment_sender_name"].'</b> on <i>'.$row["date"].'</i></div>';
+    }
+    $output .='<div class="card-body">'.$row["comment"];
 
     if(isset($_SESSION["username"])){
       $output .= '<div class="panel-footer" align="right"> <button type="button" class="btn btn-danger delete" id="'.$row["comment_id"].'">Delete</button></div>';

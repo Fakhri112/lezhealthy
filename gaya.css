@@ -118,3 +118,6 @@ font-size:1.25rem;
 .komentar-notifikasi:hover{
     color: #cc6d00 !important;
 }
+.modal-dialog.custom{
+    max-width: 850px !important;
+}
