@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 03, 2021 at 04:57 AM
+-- Generation Time: Nov 06, 2021 at 01:16 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.30
 
@@ -40,7 +40,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`username`, `password`, `email`, `nohp`, `gambar`) VALUES
-('akicha', '$2y$10$HxuJrbiM1dAwHjYr593wBO/fRTEId4BAobMbRtSjRn5uWlg5gv5Ba', '123@gmail.com', '08123444555', ''),
+('akicha', '$2y$10$HxuJrbiM1dAwHjYr593wBO/fRTEId4BAobMbRtSjRn5uWlg5gv5Ba', '123@gmail.com', '08123444555', 'akicha.png'),
 ('shani_indira', '$2y$10$MBnLigPRbNLEJ8rPVBZT4OOtDt5oqXup/6F/j2f6MrzhYm4C4f3KG', '123@gmail.com', '08970871291', 'shani_indira.png'),
 ('yuki_kashiwagi', '$2y$10$xCQ0qn.lC3ZHpcQv0pGbnOZFXTkbTG2X1u0h/euhrjA4B7pYXmGRS', '123@gmail.com', '0', '');
 
