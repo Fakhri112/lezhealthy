@@ -96,7 +96,7 @@ function get_reply_comment($connect, $parent_id = 0, $marginleft = 0)
     }
     $output .='<div class="card-body">'.$row["comment"];
 
-    if(isset($_SESSION["username"])){
+    if($_SESSION["username"] == $row["comment_sender_name"]){
       $output .= '<div class="panel-footer" align="right"> <button type="button" class="btn btn-danger delete" id="'.$row["comment_id"].'">Delete</button></div>';
     }
     $output .= '</div></div></div>';
