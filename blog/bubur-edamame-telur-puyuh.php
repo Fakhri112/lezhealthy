@@ -48,7 +48,7 @@
             </li>
           </ul>
 
-        <form class="form-inline my-2 my-lg-0" action="result.php" method="get">
+        <form class="form-inline my-2 my-lg-0" action="../result.php" method="get">
            <input class="form-control me-2" style="width:200px" name="keyword" placeholder="Search" aria-label="Search">
         </form>
         <span>
@@ -174,7 +174,7 @@
 
   <footer class="bg-dark mt-auto">
     <div class="container">
-      <footer class="py-4 footer-blog">
+      <footer class="py-4 mt-5">
       <div class="row">
         <div class="col-9">
             <ul class="nav">

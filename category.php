@@ -62,24 +62,24 @@ session_start();
     <div class="container" style="margin-top: 110px;">
         <h3>Category</h3>
         <hr>
-        <div class="d-flex justify-content-center">
+        <div class="container">
         <form action="search-category.php" method="post">
-            <div class="row mt-5">
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Makanan Basah" />
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Sayur"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Goreng"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Minuman"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Rebus"/>
+            <div class="row mt-5 d-flex justify-content-center">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Lauk"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Breakfast"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-2 rounded-0 border border-white" value="Goreng"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Minuman"/>
             </div>
-            <div class="row mt-5 justify-content-center">
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Breakfast"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Sambal"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Pedas"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Camilan"/>
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info ml-5" value="Lauk"/>
+            <div class="row mt-5 d-flex justify-content-center">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Rebus"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-2 rounded-0 border border-white" value="Sayur"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Sambal"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Pedas"/>
             </div>
-            <div class="row  mt-5 justify-content-center">
-            <input type="submit" name="submit_ct" id="submit" class="btn btn-info" value="Kuah"/>
+            <div class="row mt-5 d-flex justify-content-center">
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Camilan"/>
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-5 rounded-0 border border-white" value="Makanan Basah" />
+            <input type="submit" name="submit_ct" id="submit" class="btn btn-info col-3 rounded-0 border border-white" value="Kuah"/>
             </div>
         </form>
         </div>
@@ -93,7 +93,7 @@ session_start();
 
 <footer class="bg-dark mt-auto">
     <div class="container">
-      <footer class="py-4 footer-blog">
+      <footer class="py-4 footer-big-space">
       <div class="row">
         <div class="col-9">
             <ul class="nav">

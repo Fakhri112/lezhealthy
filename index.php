@@ -257,7 +257,7 @@
 
 <footer class="bg-dark mt-auto">
     <div class="container">
-      <footer class="py-4 footer-blog">
+      <footer class="py-4 mt-5">
       <div class="row">
         <div class="col-9">
             <ul class="nav">
