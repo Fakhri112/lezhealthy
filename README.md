@@ -3,7 +3,7 @@
 Web Blog Resep Makanan dan Minuman
 
 Dikhususkan untuk : <br />
-Projek pembuatan website untuk mata kuliah pemrograman web <br />
+Projek pembuatan website untuk mata kuliah Pemrograman Web <br />
 
 ### User Login
 Terdapat tiga username, diantaranya : <br /><br />
