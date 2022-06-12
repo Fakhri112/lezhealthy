@@ -5,16 +5,10 @@
 Dikhususkan untuk :  \
 Projek pembuatan website untuk mata kuliah Pemrograman Web
 
-### User Login
+### Akun Dummy
 - shani_indira        =======       Password : 123
 - akicha              ===========       Password : 123
 - yuki_kashiwagi      ======       Password : 123
-
-### Cara Pakai
-- Buat database dengan nama `"food_and_health"`
-- Export semua file sql ke dalam database `"food_and_health"`
-- Done
-
 
 ### Screenshots
 
