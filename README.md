@@ -15,5 +15,3 @@ Projek pembuatan website untuk mata kuliah Pemrograman Web
  ![App Screenshot](https://i.postimg.cc/q75vxh1Z/image.png)
  [![image.png](https://i.postimg.cc/02VG1Zj6/image.png)](https://postimg.cc/3dD0gXg7)
  
- ### Project Result
- [Lezhealthy](https://lezhealthyapp.000webhostapp.com/)
