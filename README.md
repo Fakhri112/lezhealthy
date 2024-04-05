@@ -13,7 +13,7 @@ Projek pembuatan website untuk mata kuliah Pemrograman Web
 
 ### Demo Project
 
-[lezhealty.42web.io](www.lezhealty.42web.io)
+[lezhealty.42web.io](http://lezhealty.42web.io)
 
 ### Screenshots
 
