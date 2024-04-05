@@ -17,7 +17,7 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <style><?php include 'gaya.css'; ?></style>
 </head>
-<body>
+<body style="height: 100vh" class=" d-flex flex-column">
     <!-- Nav ---------------------------------------------------->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top p-3 navbar4bg">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,7 +93,7 @@ session_start();
 
 <footer class="bg-dark mt-auto">
     <div class="container">
-      <footer class="py-4 footer-big-space">
+      <footer class="py-4 ">
       <div class="row">
         <div class="col-9">
             <ul class="nav">
